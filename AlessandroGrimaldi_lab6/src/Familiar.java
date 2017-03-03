@@ -4,33 +4,81 @@ import java.util.ArrayList;
 import javax.swing.tree.DefaultTreeModel;
 
 
-class Familiar extends Persona {
-    protected Familiar padre;
-    protected ArrayList<Familiar> hijos;
+class Familiar  {
+    protected int edad;
+    protected String ID;
+    protected String nacionalidad;
+    protected String lugar,nombre;
+    protected DefaultTreeModel arbol;
+    protected Color color;
 
     public Familiar() {
     }
 
-    public Familiar(Familiar padre, ArrayList<Familiar> hijos, int edad, String ID, String nacionalidad, String lugar, String nombre, DefaultTreeModel arbol, Color color, Familiar familiar) {
-        super(edad, ID, nacionalidad, lugar, nombre, arbol, color, familiar);
-        this.padre = padre;
-        this.hijos = hijos;
+    public Familiar(int edad, String ID, String nacionalidad, String lugar, String nombre, DefaultTreeModel arbol, Color color) {
+        this.edad = edad;
+        this.ID = ID;
+        this.nacionalidad = nacionalidad;
+        this.lugar = lugar;
+        this.nombre = nombre;
+        this.arbol = arbol;
+        this.color = color;
     }
 
-    public Familiar getPadre() {
-        return padre;
+    public int getEdad() {
+        return edad;
     }
 
-    public void setPadre(Familiar padre) {
-        this.padre = padre;
+    public void setEdad(int edad) {
+        this.edad = edad;
     }
 
-    public ArrayList<Familiar> getHijos() {
-        return hijos;
+    public String getID() {
+        return ID;
     }
 
-    public void setHijos(ArrayList<Familiar> hijos) {
-        this.hijos = hijos;
+    public void setID(String ID) {
+        this.ID = ID;
+    }
+
+    public String getNacionalidad() {
+        return nacionalidad;
+    }
+
+    public void setNacionalidad(String nacionalidad) {
+        this.nacionalidad = nacionalidad;
+    }
+
+    public String getLugar() {
+        return lugar;
+    }
+
+    public void setLugar(String lugar) {
+        this.lugar = lugar;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public DefaultTreeModel getArbol() {
+        return arbol;
+    }
+
+    public void setArbol(DefaultTreeModel arbol) {
+        this.arbol = arbol;
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
     }
 
     @Override

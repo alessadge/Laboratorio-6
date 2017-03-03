@@ -1,17 +1,18 @@
 
-import java.util.Date;
+import java.util.ArrayList;
 
 
 public class Empleado extends Persona{
     protected String lugar,estado;
-    protected Date entrada;
-    protected Date salida;
-    protected int sueldo;
+    protected int entrada;
+    protected int salida;
+    protected float sueldo;
+    protected ArrayList<Ordenes> ordenes;
 
     public Empleado() {
     }
 
-    public Empleado(String lugar, String estado, Date entrada, Date salida, int sueldo) {
+    public Empleado(String lugar, String estado,int entrada,int  salida, int sueldo) {
         this.lugar = lugar;
         this.estado = estado;
         this.entrada = entrada;
@@ -35,33 +36,42 @@ public class Empleado extends Persona{
         this.estado = estado;
     }
 
-    public Date getEntrada() {
+    public int getEntrada() {
         return entrada;
     }
 
-    public void setEntrada(Date entrada) {
+    public void setEntrada(int entrada) {
         this.entrada = entrada;
     }
 
-    public Date getSalida() {
+    public int getSalida() {
         return salida;
     }
 
-    public void setSalida(Date salida) {
+    public void setSalida(int salida) {
         this.salida = salida;
     }
 
-    public int getSueldo() {
+    public float getSueldo() {
         return sueldo;
     }
 
-    public void setSueldo(int sueldo) {
+    public void setSueldo(float sueldo) {
         this.sueldo = sueldo;
     }
 
+    public ArrayList<Ordenes> getOrdenes() {
+        return ordenes;
+    }
+
+    public void setOrdenes(ArrayList<Ordenes> ordenes) {
+        this.ordenes = ordenes;
+    }
+
+    
     @Override
     public String toString() {
-        return nombre;
+        return super.nombre;
     }
     
 }

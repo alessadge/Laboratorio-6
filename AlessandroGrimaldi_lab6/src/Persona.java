@@ -1,5 +1,6 @@
 
 import java.awt.Color;
+import java.util.ArrayList;
 import javax.swing.tree.DefaultTreeModel;
 
 
@@ -11,7 +12,7 @@ public class Persona {
     protected String lugar,nombre;
     protected DefaultTreeModel arbol;
     protected Color color;
-    protected Familiar familiar;
+    protected ArrayList<Familiar> familiares;
 
     public Persona() {
     }
@@ -24,7 +25,7 @@ public class Persona {
         this.nombre = nombre;
         this.arbol = arbol;
         this.color = color;
-        this.familiar = familiar;
+ 
     }
 
     public int getEdad() {
@@ -83,17 +84,17 @@ public class Persona {
         this.color = color;
     }
 
-    public Familiar getFamiliar() {
-        return familiar;
+    public ArrayList<Familiar> getFamiliares() {
+        return familiares;
     }
 
-    public void setFamiliar(Familiar familiar) {
-        this.familiar = familiar;
+    public void setFamiliares(ArrayList<Familiar> familiares) {
+        this.familiares = familiares;
     }
 
     @Override
     public String toString() {
-        return nombre;
+        return this.nombre;
     }
     
 }
