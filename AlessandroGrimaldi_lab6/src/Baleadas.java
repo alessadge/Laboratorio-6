@@ -2,13 +2,14 @@
 import java.util.ArrayList;
 
 
-public class Baleadas {
+public class Baleadas extends Articulos {
     ArrayList<String> ingredientes;
 
     public Baleadas() {
     }
 
-    public Baleadas(ArrayList<String> ingredientes) {
+    public Baleadas(ArrayList<String> ingredientes, int precio) {
+        super(precio);
         this.ingredientes = ingredientes;
     }
 

@@ -1,12 +1,13 @@
 
-public class Gatos {
+public class Gatos extends Articulos {
    private int peso;
    private int altura;
 
     public Gatos() {
     }
 
-    public Gatos(int peso, int altura) {
+    public Gatos(int peso, int altura, int precio) {
+        super(precio);
         this.peso = peso;
         this.altura = altura;
     }

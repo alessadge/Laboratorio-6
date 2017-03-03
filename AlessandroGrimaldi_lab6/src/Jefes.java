@@ -7,12 +7,13 @@ import javax.swing.tree.DefaultTreeModel;
 public class Jefes extends Persona {
     private String seccion;
     private ArrayList<Empleado> empleados;
-    private int numero,ganancia;
+    private int numero;
+    private float ganancia;
 
     public Jefes() {
     }
 
-    public Jefes(String seccion, ArrayList<Empleado> empleados, int numero, int ganancia, int edad, String ID, String nacionalidad, String lugar, String nombre, DefaultTreeModel arbol, Color color, Familiar familiar) {
+    public Jefes(String seccion, ArrayList<Empleado> empleados, int numero, float ganancia, int edad, String ID, String nacionalidad, String lugar, String nombre, DefaultTreeModel arbol, Color color, Familiar familiar) {
         super(edad, ID, nacionalidad, lugar, nombre, arbol, color, familiar);
         this.seccion = seccion;
         this.empleados = empleados;
@@ -44,11 +45,11 @@ public class Jefes extends Persona {
         this.numero = numero;
     }
 
-    public int getGanancia() {
+    public float getGanancia() {
         return ganancia;
     }
 
-    public void setGanancia(int ganancia) {
+    public void setGanancia(float ganancia) {
         this.ganancia = ganancia;
     }
 

@@ -1,4 +1,25 @@
 
 public class Articulos {
-    private int precio;
+    private float precio;
+
+    public Articulos() {
+    }
+
+    public Articulos(int precio) {
+        this.precio = precio;
+    }
+
+    public float getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(float precio) {
+        this.precio = precio;
+    }
+
+    @Override
+    public String toString() {
+        return "Articulos{" + "precio=" + precio + '}';
+    }
+    
 }
