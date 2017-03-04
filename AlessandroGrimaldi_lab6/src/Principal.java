@@ -80,6 +80,24 @@ int ticket=0;
         jLabel25 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
+        tf_nombreClientes1 = new javax.swing.JTextField();
+        tf_nombreClientes2 = new javax.swing.JTextField();
+        tf_nombreClientes3 = new javax.swing.JTextField();
+        tf_nombreClientes4 = new javax.swing.JTextField();
+        tf_nombreClientes5 = new javax.swing.JTextField();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTree3 = new javax.swing.JTree();
+        jButton8 = new javax.swing.JButton();
+        jLabel21 = new javax.swing.JLabel();
+        bttn_colorClientes1 = new javax.swing.JButton();
+        jLabel28 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jLabel29 = new javax.swing.JLabel();
+        jLabel30 = new javax.swing.JLabel();
+        tf_nombreClientes6 = new javax.swing.JTextField();
+        tf_nombreClientes7 = new javax.swing.JTextField();
+        jLabel31 = new javax.swing.JLabel();
+        jComboBox2 = new javax.swing.JComboBox<>();
         jd_gato = new javax.swing.JDialog();
         jd_baleadas = new javax.swing.JDialog();
         jd_familiar = new javax.swing.JDialog();
@@ -480,41 +498,187 @@ int ticket=0;
         jLabel27.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel27.setText("ID:");
 
+        tf_nombreClientes1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_nombreClientes1ActionPerformed(evt);
+            }
+        });
+
+        tf_nombreClientes2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_nombreClientes2ActionPerformed(evt);
+            }
+        });
+
+        tf_nombreClientes3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_nombreClientes3ActionPerformed(evt);
+            }
+        });
+
+        tf_nombreClientes4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_nombreClientes4ActionPerformed(evt);
+            }
+        });
+
+        tf_nombreClientes5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_nombreClientes5ActionPerformed(evt);
+            }
+        });
+
+        treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("root");
+        jTree3.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        jScrollPane3.setViewportView(jTree3);
+
+        jButton8.setText("Agregar");
+
+        jLabel21.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        jLabel21.setText("Color de piel:");
+
+        bttn_colorClientes1.setBackground(new java.awt.Color(153, 153, 153));
+        bttn_colorClientes1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        bttn_colorClientes1.setText("Color");
+        bttn_colorClientes1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bttn_colorClientes1MouseClicked(evt);
+            }
+        });
+
+        jLabel28.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        jLabel28.setText("Seccion de trabajo:");
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cocina", "Venta de gatos", "Venta de baleadas" }));
+
+        jLabel29.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        jLabel29.setText("Ganancia:");
+
+        jLabel30.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        jLabel30.setText("Numero clientes:");
+
+        tf_nombreClientes6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_nombreClientes6ActionPerformed(evt);
+            }
+        });
+
+        tf_nombreClientes7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_nombreClientes7ActionPerformed(evt);
+            }
+        });
+
+        jLabel31.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        jLabel31.setText("Lista empleados:");
+
         javax.swing.GroupLayout jd_jefeLayout = new javax.swing.GroupLayout(jd_jefe.getContentPane());
         jd_jefe.getContentPane().setLayout(jd_jefeLayout);
         jd_jefeLayout.setHorizontalGroup(
             jd_jefeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jd_jefeLayout.createSequentialGroup()
+                .addGap(39, 39, 39)
                 .addGroup(jd_jefeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jd_jefeLayout.createSequentialGroup()
-                        .addGap(39, 39, 39)
+                        .addGroup(jd_jefeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jd_jefeLayout.createSequentialGroup()
+                                .addGroup(jd_jefeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel21)
+                                    .addComponent(jLabel25)
+                                    .addComponent(jLabel28))
+                                .addGap(18, 18, 18)
+                                .addGroup(jd_jefeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(tf_nombreClientes5, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(bttn_colorClientes1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jComboBox1, 0, 148, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jd_jefeLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(161, 161, 161)))
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(54, 54, 54))
+                    .addGroup(jd_jefeLayout.createSequentialGroup()
                         .addGroup(jd_jefeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jd_jefeLayout.createSequentialGroup()
                                 .addGap(51, 51, 51)
                                 .addGroup(jd_jefeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel23)
                                     .addComponent(jLabel24)
-                                    .addComponent(jLabel26)))
-                            .addComponent(jLabel25)))
-                    .addGroup(jd_jefeLayout.createSequentialGroup()
-                        .addGap(147, 147, 147)
-                        .addComponent(jLabel27)))
-                .addContainerGap(525, Short.MAX_VALUE))
+                                    .addComponent(jLabel26))
+                                .addGap(18, 18, 18)
+                                .addGroup(jd_jefeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(tf_nombreClientes4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
+                                    .addComponent(tf_nombreClientes3, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(tf_nombreClientes2, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(tf_nombreClientes1)))
+                            .addGroup(jd_jefeLayout.createSequentialGroup()
+                                .addGap(108, 108, 108)
+                                .addComponent(jLabel27)))
+                        .addGap(52, 52, 52)
+                        .addGroup(jd_jefeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel30)
+                            .addComponent(jLabel29)
+                            .addComponent(jLabel31))
+                        .addGap(18, 18, 18)
+                        .addGroup(jd_jefeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jd_jefeLayout.createSequentialGroup()
+                                .addGroup(jd_jefeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(tf_nombreClientes6)
+                                    .addComponent(tf_nombreClientes7))
+                                .addGap(33, 33, 33))
+                            .addGroup(jd_jefeLayout.createSequentialGroup()
+                                .addComponent(jComboBox2, 0, 170, Short.MAX_VALUE)
+                                .addContainerGap())))))
         );
         jd_jefeLayout.setVerticalGroup(
             jd_jefeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jd_jefeLayout.createSequentialGroup()
-                .addGap(65, 65, 65)
-                .addComponent(jLabel26)
-                .addGap(25, 25, 25)
-                .addComponent(jLabel24)
-                .addGap(26, 26, 26)
-                .addComponent(jLabel27)
-                .addGap(27, 27, 27)
-                .addComponent(jLabel23)
-                .addGap(28, 28, 28)
-                .addComponent(jLabel25)
-                .addContainerGap(199, Short.MAX_VALUE))
+                .addGap(64, 64, 64)
+                .addGroup(jd_jefeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel26)
+                    .addComponent(tf_nombreClientes1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel30)
+                    .addComponent(tf_nombreClientes6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
+                .addGroup(jd_jefeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel24)
+                    .addComponent(tf_nombreClientes4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel29)
+                    .addComponent(tf_nombreClientes7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22)
+                .addGroup(jd_jefeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel27)
+                    .addComponent(tf_nombreClientes3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel31)
+                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jd_jefeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jd_jefeLayout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addGroup(jd_jefeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel23)
+                            .addComponent(tf_nombreClientes2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(24, 24, 24)
+                        .addGroup(jd_jefeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel25)
+                            .addComponent(tf_nombreClientes5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jd_jefeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jd_jefeLayout.createSequentialGroup()
+                                .addGap(29, 29, 29)
+                                .addComponent(jLabel21))
+                            .addGroup(jd_jefeLayout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(bttn_colorClientes1)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                        .addGroup(jd_jefeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel28)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(34, 34, 34)
+                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jd_jefeLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(34, 34, 34))
         );
 
         jd_gato.setTitle("Agregar Gato");
@@ -1047,7 +1211,40 @@ int ticket=0;
     private void jButton9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton9MouseClicked
         // TODO add your handling code here:
         ticket++;
+        
     }//GEN-LAST:event_jButton9MouseClicked
+
+    private void tf_nombreClientes1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_nombreClientes1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tf_nombreClientes1ActionPerformed
+
+    private void tf_nombreClientes2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_nombreClientes2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tf_nombreClientes2ActionPerformed
+
+    private void tf_nombreClientes3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_nombreClientes3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tf_nombreClientes3ActionPerformed
+
+    private void tf_nombreClientes4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_nombreClientes4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tf_nombreClientes4ActionPerformed
+
+    private void tf_nombreClientes5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_nombreClientes5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tf_nombreClientes5ActionPerformed
+
+    private void bttn_colorClientes1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bttn_colorClientes1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bttn_colorClientes1MouseClicked
+
+    private void tf_nombreClientes6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_nombreClientes6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tf_nombreClientes6ActionPerformed
+
+    private void tf_nombreClientes7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_nombreClientes7ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tf_nombreClientes7ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1087,6 +1284,7 @@ int ticket=0;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bttn_color;
     private javax.swing.JButton bttn_colorClientes;
+    private javax.swing.JButton bttn_colorClientes1;
     private javax.swing.JComboBox<String> cb_estado;
     private javax.swing.JComboBox<String> cb_seccion;
     private javax.swing.JButton jButton1;
@@ -1096,7 +1294,10 @@ int ticket=0;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1110,13 +1311,18 @@ int ticket=0;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -1142,10 +1348,12 @@ int ticket=0;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTree jTree1;
     private javax.swing.JTree jTree2;
+    private javax.swing.JTree jTree3;
     private javax.swing.JDialog jd_baleadas;
     private javax.swing.JDialog jd_cliente;
     private javax.swing.JDialog jd_empleados;
@@ -1165,6 +1373,13 @@ int ticket=0;
     private javax.swing.JTextField tf_nacionalidadClientes;
     private javax.swing.JTextField tf_nombre;
     private javax.swing.JTextField tf_nombreClientes;
+    private javax.swing.JTextField tf_nombreClientes1;
+    private javax.swing.JTextField tf_nombreClientes2;
+    private javax.swing.JTextField tf_nombreClientes3;
+    private javax.swing.JTextField tf_nombreClientes4;
+    private javax.swing.JTextField tf_nombreClientes5;
+    private javax.swing.JTextField tf_nombreClientes6;
+    private javax.swing.JTextField tf_nombreClientes7;
     private javax.swing.JTextField tf_sueldo;
     // End of variables declaration//GEN-END:variables
 }
