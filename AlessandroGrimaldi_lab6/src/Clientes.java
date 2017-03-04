@@ -47,7 +47,7 @@ public class Clientes extends Persona {
 
     @Override
     public String toString() {
-        return super.nombre;
+        return nombre;
     }
     
 }

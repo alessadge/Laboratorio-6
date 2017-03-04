@@ -95,7 +95,7 @@ public class Persona {
 
     @Override
     public String toString() {
-        return this.nombre;
+        return nombre;
     }
     
 }

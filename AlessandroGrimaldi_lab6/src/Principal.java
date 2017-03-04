@@ -5,6 +5,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JColorChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTree;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.tree.DefaultTreeModel;
 
 /*
@@ -144,6 +145,7 @@ int ticket=0;
         jButton13 = new javax.swing.JButton();
         buttonGroup1 = new javax.swing.ButtonGroup();
         buttonGroup2 = new javax.swing.ButtonGroup();
+        buttonGroup3 = new javax.swing.ButtonGroup();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jPanel8 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
@@ -163,6 +165,15 @@ int ticket=0;
         jLabel3 = new javax.swing.JLabel();
         jButton6 = new javax.swing.JButton();
         jPanel7 = new javax.swing.JPanel();
+        jPanel11 = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        Tabla = new javax.swing.JTable();
+        jRadioButton1 = new javax.swing.JRadioButton();
+        jRadioButton2 = new javax.swing.JRadioButton();
+        jRadioButton3 = new javax.swing.JRadioButton();
+        jRadioButton4 = new javax.swing.JRadioButton();
+        jRadioButton5 = new javax.swing.JRadioButton();
+        jRadioButton6 = new javax.swing.JRadioButton();
         jPanel9 = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -990,7 +1001,6 @@ int ticket=0;
         });
 
         buttonGroup1.add(Familia1);
-        Familia1.setSelected(true);
         Familia1.setText("Familia");
         Familia1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1007,7 +1017,6 @@ int ticket=0;
         });
 
         buttonGroup2.add(Familia2);
-        Familia2.setSelected(true);
         Familia2.setText("Familia");
         Familia2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1406,22 +1415,116 @@ int ticket=0;
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 2, Short.MAX_VALUE))
+                .addGap(0, 21, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Agregar", jPanel8);
 
         jPanel7.setBackground(new java.awt.Color(153, 153, 153));
 
+        Tabla.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        Tabla.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane4.setViewportView(Tabla);
+
+        buttonGroup3.add(jRadioButton1);
+        jRadioButton1.setText("Persona");
+        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton1ActionPerformed(evt);
+            }
+        });
+
+        buttonGroup3.add(jRadioButton2);
+        jRadioButton2.setText("Jefes");
+        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton2ActionPerformed(evt);
+            }
+        });
+
+        buttonGroup3.add(jRadioButton3);
+        jRadioButton3.setText("Empleados");
+        jRadioButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton3ActionPerformed(evt);
+            }
+        });
+
+        buttonGroup3.add(jRadioButton4);
+        jRadioButton4.setText("Clientes");
+        jRadioButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton4ActionPerformed(evt);
+            }
+        });
+
+        buttonGroup3.add(jRadioButton5);
+        jRadioButton5.setText("Gatos");
+
+        buttonGroup3.add(jRadioButton6);
+        jRadioButton6.setText("Familiares");
+
+        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
+        jPanel11.setLayout(jPanel11Layout);
+        jPanel11Layout.setHorizontalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jRadioButton2)
+                .addGap(27, 27, 27)
+                .addComponent(jRadioButton3)
+                .addGap(18, 18, 18)
+                .addComponent(jRadioButton4)
+                .addGap(18, 18, 18)
+                .addComponent(jRadioButton5)
+                .addGap(18, 18, 18)
+                .addComponent(jRadioButton1)
+                .addGap(27, 27, 27)
+                .addComponent(jRadioButton6)
+                .addGap(139, 139, 139))
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addGap(49, 49, 49)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 580, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(64, Short.MAX_VALUE))
+        );
+        jPanel11Layout.setVerticalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
+                .addContainerGap(44, Short.MAX_VALUE)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jRadioButton2)
+                    .addComponent(jRadioButton3)
+                    .addComponent(jRadioButton4)
+                    .addComponent(jRadioButton5)
+                    .addComponent(jRadioButton1)
+                    .addComponent(jRadioButton6))
+                .addGap(32, 32, 32)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29))
+        );
+
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 713, Short.MAX_VALUE)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 412, Short.MAX_VALUE)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jTabbedPane2.addTab("Listar", jPanel7);
@@ -1436,7 +1539,7 @@ int ticket=0;
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 412, Short.MAX_VALUE)
+            .addGap(0, 431, Short.MAX_VALUE)
         );
 
         jTabbedPane2.addTab("Modificar/Eliminar", jPanel9);
@@ -1451,7 +1554,7 @@ int ticket=0;
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 412, Short.MAX_VALUE)
+            .addGap(0, 431, Short.MAX_VALUE)
         );
 
         jTabbedPane2.addTab("Crear Ventas", jPanel10);
@@ -1501,7 +1604,7 @@ int ticket=0;
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 724, Short.MAX_VALUE)
+                .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 724, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -1853,8 +1956,8 @@ int ticket=0;
 
     private void agregarEmpleadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_agregarEmpleadoMouseClicked
         // TODO add your handling code here:
-        Empleado empleado;
-        empleado=cb_listaEmpleados.getItemAt(cb_listaEmpleados.getSelectedIndex());
+        
+        Empleado empleado=cb_listaEmpleados.getItemAt(cb_listaEmpleados.getSelectedIndex());
         temporal.add(empleado);
         JOptionPane.showMessageDialog(this, "Se agrego el empleado exitosamente.");
     }//GEN-LAST:event_agregarEmpleadoMouseClicked
@@ -1987,6 +2090,66 @@ int ticket=0;
         
     }//GEN-LAST:event_jButton13MouseClicked
 
+    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButton1ActionPerformed
+
+    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
+        // TODO add your handling code here:
+        Tabla.setModel(new javax.swing.table.DefaultTableModel(new Object[][]{},new String[]{"Nombre",
+                "ID","Seccion de trabajo","Nacionalidad","Color de piel"}));
+        DefaultTableModel modelo=(DefaultTableModel) Tabla.getModel();
+        for (int i = 0; i < jefe.size();i++) {
+            Object[] row = {
+                jefe.get(i).getNombre(),
+                jefe.get(i).getID(),
+                jefe.get(i).getSeccion(),
+                jefe.get(i).getNacionalidad(),
+                jefe.get(i).getColor()
+            };
+            modelo.addRow(row);
+        }
+        Tabla.setModel(modelo);
+    }//GEN-LAST:event_jRadioButton2ActionPerformed
+
+    private void jRadioButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton3ActionPerformed
+        // TODO add your handling code here:
+        Tabla.setModel(new javax.swing.table.DefaultTableModel(new Object[][]{},new String[]{"Nombre",
+                "ID","Seccion de trabajo","Nacionalidad","Color de piel","Estado"}));
+        DefaultTableModel modelo=(DefaultTableModel) Tabla.getModel();
+        for (int i = 0; i < empleado.size();i++) {
+            Object[] row = {
+                empleado.get(i).getNombre(),
+                empleado.get(i).getID(),
+                empleado.get(i).getSeccion(),
+                empleado.get(i).getNacionalidad(),
+                empleado.get(i).getColor(),
+                empleado.get(i).getEstado()
+            };
+            modelo.addRow(row);
+        }
+        Tabla.setModel(modelo);
+    }//GEN-LAST:event_jRadioButton3ActionPerformed
+
+    private void jRadioButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton4ActionPerformed
+        // TODO add your handling code here:
+        Tabla.setModel(new javax.swing.table.DefaultTableModel(new Object[][]{},new String[]{"Nombre",
+                "ID","Numero de ticket","Nacionalidad","Color de piel","Dinero disponible"}));
+        DefaultTableModel modelo=(DefaultTableModel) Tabla.getModel();
+        for (int i = 0; i < cliente.size();i++) {
+            Object[] row = {
+                cliente.get(i).getNombre(),
+                cliente.get(i).getID(),
+                cliente.get(i).getTicket(),
+                cliente.get(i).getNacionalidad(),
+                cliente.get(i).getColor(),
+                cliente.get(i).getDinero()
+            };
+            modelo.addRow(row);
+        }
+        Tabla.setModel(modelo);
+    }//GEN-LAST:event_jRadioButton4ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -2025,6 +2188,7 @@ int ticket=0;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton Familia1;
     private javax.swing.JRadioButton Familia2;
+    private javax.swing.JTable Tabla;
     private javax.swing.JButton agregarEmpleado;
     private javax.swing.JButton agregarJefe;
     private javax.swing.JTextField altura;
@@ -2034,6 +2198,7 @@ int ticket=0;
     private javax.swing.JButton bttn_colorJefe;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.ButtonGroup buttonGroup3;
     private javax.swing.JComboBox<String> cb_estado;
     private javax.swing.JComboBox cb_hijo;
     private javax.swing.JComboBox<Empleado> cb_listaEmpleados;
@@ -2106,6 +2271,7 @@ int ticket=0;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -2114,9 +2280,16 @@ int ticket=0;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JRadioButton jRadioButton2;
+    private javax.swing.JRadioButton jRadioButton3;
+    private javax.swing.JRadioButton jRadioButton4;
+    private javax.swing.JRadioButton jRadioButton5;
+    private javax.swing.JRadioButton jRadioButton6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTree jTree2;
@@ -2174,5 +2347,6 @@ ArrayList<Familiar> familias=new ArrayList();
 ArrayList hijos=new ArrayList();
 ArrayList<Familiar> padre=new ArrayList();
 ArrayList tempFamiliar=new ArrayList();
+//Poner los spinners hasta 24 horas
 
 }

@@ -37,7 +37,7 @@ class Familiar extends Persona {
 
     @Override
     public String toString() {
-        return super.toString()+"Familiar{" + "hijos=" + hijos + ", padre=" + padre + '}';
+        return super.toString()+"Familiar{" + "hijos=" + hijos + ", padre=" + padre ;
     }
    
     
