@@ -21,6 +21,7 @@ import javax.swing.tree.DefaultTreeModel;
  */
 public class Principal extends javax.swing.JFrame {
 int ticket=0;
+private int acum=0;
     /**
      * Creates new form Principal
      */
@@ -148,6 +149,8 @@ int ticket=0;
         buttonGroup2 = new javax.swing.ButtonGroup();
         buttonGroup3 = new javax.swing.ButtonGroup();
         buttonGroup4 = new javax.swing.ButtonGroup();
+        buttonGroup5 = new javax.swing.ButtonGroup();
+        buttonGroup6 = new javax.swing.ButtonGroup();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jPanel8 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
@@ -212,13 +215,16 @@ int ticket=0;
         jLabel57 = new javax.swing.JLabel();
         jLabel58 = new javax.swing.JLabel();
         jLabel59 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        cb_gatosEmpleados = new javax.swing.JComboBox<>();
         sp_numArt1 = new javax.swing.JSpinner();
-        jTextField8 = new javax.swing.JTextField();
-        jButton18 = new javax.swing.JButton();
-        jButton19 = new javax.swing.JButton();
-        fecha1 = new com.toedter.calendar.JDateChooser();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        tf_totalGatos = new javax.swing.JTextField();
+        bttn_ordenarGato = new javax.swing.JButton();
+        fecha_gato = new com.toedter.calendar.JDateChooser();
+        cb_gatosCliente = new javax.swing.JComboBox<>();
+        jLabel62 = new javax.swing.JLabel();
+        cb_gatosGatos = new javax.swing.JComboBox<>();
+        progressGatos = new javax.swing.JProgressBar();
+        jLabel63 = new javax.swing.JLabel();
         jPanel16 = new javax.swing.JPanel();
         jLabel50 = new javax.swing.JLabel();
         jLabel51 = new javax.swing.JLabel();
@@ -232,6 +238,18 @@ int ticket=0;
         jButton21 = new javax.swing.JButton();
         jDateChooser3 = new com.toedter.calendar.JDateChooser();
         jComboBox4 = new javax.swing.JComboBox<>();
+        jPanel13 = new javax.swing.JPanel();
+        jTabbedPane4 = new javax.swing.JTabbedPane();
+        jPanel17 = new javax.swing.JPanel();
+        jRadioButton13 = new javax.swing.JRadioButton();
+        jRadioButton14 = new javax.swing.JRadioButton();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        Jlist1 = new javax.swing.JList<>();
+        jPanel18 = new javax.swing.JPanel();
+        jRadioButton15 = new javax.swing.JRadioButton();
+        jRadioButton16 = new javax.swing.JRadioButton();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        Jlist2 = new javax.swing.JList<>();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -324,6 +342,10 @@ int ticket=0;
                 jButton7MouseClicked(evt);
             }
         });
+
+        sp_entrada.setModel(new javax.swing.SpinnerNumberModel(0, 0, 24, 1));
+
+        sp_salida.setModel(new javax.swing.SpinnerNumberModel(0, 0, 24, 1));
 
         bttn_color.setBackground(new java.awt.Color(153, 153, 153));
         bttn_color.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -1785,10 +1807,10 @@ int ticket=0;
             }
         });
 
-        progressBaleada.setMaximum(2);
+        progressBaleada.setMaximum(3);
 
         jLabel60.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel60.setText("Numero ordenes:");
+        jLabel60.setText("Progreso de ordenes:");
 
         jLabel61.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel61.setText("Seleccion una Baleada:");
@@ -1829,7 +1851,7 @@ int ticket=0;
                         .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(progressBaleada, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addComponent(jf_fecha, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE))
-                        .addGap(0, 62, Short.MAX_VALUE))))
+                        .addGap(0, 41, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel14Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(bttn_ordenarBaleada, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1870,6 +1892,12 @@ int ticket=0;
 
         jTabbedPane3.addTab("Venta de seccion baleadas", jPanel14);
 
+        jPanel15.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jPanel15MouseEntered(evt);
+            }
+        });
+
         jLabel55.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel55.setText("Total:");
 
@@ -1885,15 +1913,29 @@ int ticket=0;
         jLabel59.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel59.setText("Fecha de la venta:");
 
-        jTextField8.setEnabled(false);
+        tf_totalGatos.setEnabled(false);
 
-        jButton18.setBackground(new java.awt.Color(153, 153, 153));
-        jButton18.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jButton18.setText("Venta");
+        bttn_ordenarGato.setBackground(new java.awt.Color(153, 153, 153));
+        bttn_ordenarGato.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        bttn_ordenarGato.setText("Ordenar");
+        bttn_ordenarGato.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                bttn_ordenarGatoStateChanged(evt);
+            }
+        });
+        bttn_ordenarGato.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bttn_ordenarGatoMouseClicked(evt);
+            }
+        });
 
-        jButton19.setBackground(new java.awt.Color(153, 153, 153));
-        jButton19.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jButton19.setText("Ordenar");
+        jLabel62.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel62.setText("Seleccione un gato:");
+
+        progressGatos.setMaximum(3);
+
+        jLabel63.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel63.setText("Progreso de ordenes:");
 
         javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
         jPanel15.setLayout(jPanel15Layout);
@@ -1901,61 +1943,68 @@ int ticket=0;
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel15Layout.createSequentialGroup()
                 .addGap(39, 39, 39)
-                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel15Layout.createSequentialGroup()
-                        .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel55)
-                            .addComponent(jLabel58)
-                            .addComponent(jLabel57)
-                            .addComponent(jLabel56))
-                        .addGap(31, 31, 31)
-                        .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jComboBox3, 0, 130, Short.MAX_VALUE)
-                            .addComponent(jTextField8, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
-                            .addComponent(sp_numArt1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(43, 43, 43)
-                        .addComponent(jLabel59)
-                        .addGap(18, 18, 18)
-                        .addComponent(fecha1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel15Layout.createSequentialGroup()
-                        .addGap(121, 121, 121)
-                        .addComponent(jButton19, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel55)
+                    .addComponent(jLabel58)
+                    .addComponent(jLabel57)
+                    .addComponent(jLabel56)
+                    .addComponent(jLabel62))
+                .addGap(31, 31, 31)
+                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(cb_gatosEmpleados, 0, 130, Short.MAX_VALUE)
+                    .addComponent(tf_totalGatos, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+                    .addComponent(sp_numArt1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cb_gatosCliente, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cb_gatosGatos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(45, 45, 45)
+                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel59)
+                    .addComponent(jLabel63))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(progressGatos, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(fecha_gato, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton18, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(151, 151, 151))
+                .addComponent(bttn_ordenarGato, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(269, 269, 269))
         );
         jPanel15Layout.setVerticalGroup(
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel15Layout.createSequentialGroup()
-                .addGap(32, 32, 32)
+                .addGap(30, 30, 30)
                 .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel15Layout.createSequentialGroup()
-                        .addGap(48, 48, 48)
-                        .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel15Layout.createSequentialGroup()
                         .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel58)
-                            .addComponent(jLabel59)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(25, 25, 25)
-                        .addComponent(jLabel57)
-                        .addGap(35, 35, 35)
-                        .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel56)
-                            .addComponent(sp_numArt1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(29, 29, 29)
-                        .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel55)
-                            .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(fecha1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 104, Short.MAX_VALUE)
+                            .addComponent(jLabel62)
+                            .addComponent(cb_gatosGatos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel63))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
+                        .addComponent(progressGatos, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(fecha_gato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(cb_gatosCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel58)
+                                .addComponent(jLabel59)))))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cb_gatosEmpleados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel57))
+                .addGap(26, 26, 26)
                 .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton18, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton19, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(123, 123, 123))
+                    .addComponent(sp_numArt1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel56))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tf_totalGatos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel55))
+                .addGap(83, 83, 83)
+                .addComponent(bttn_ordenarGato, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(119, 119, 119))
         );
 
         jTabbedPane3.addTab("Venta de seccion gatos", jPanel15);
@@ -2055,6 +2104,100 @@ int ticket=0;
         );
 
         jTabbedPane3.addTab("Venta de seccion cocina", jPanel16);
+
+        jPanel17.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel17.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        buttonGroup5.add(jRadioButton13);
+        jRadioButton13.setText("Baleadas");
+
+        buttonGroup5.add(jRadioButton14);
+        jRadioButton14.setText("Gatos");
+
+        Jlist1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jScrollPane6.setViewportView(Jlist1);
+
+        javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
+        jPanel17.setLayout(jPanel17Layout);
+        jPanel17Layout.setHorizontalGroup(
+            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel17Layout.createSequentialGroup()
+                .addGap(188, 188, 188)
+                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel17Layout.createSequentialGroup()
+                        .addComponent(jRadioButton13)
+                        .addGap(77, 77, 77)
+                        .addComponent(jRadioButton14)))
+                .addContainerGap(218, Short.MAX_VALUE))
+        );
+        jPanel17Layout.setVerticalGroup(
+            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel17Layout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jRadioButton13)
+                    .addComponent(jRadioButton14))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(25, 25, 25))
+        );
+
+        jTabbedPane4.addTab("Ordenes", jPanel17);
+
+        jPanel18.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel18.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        buttonGroup6.add(jRadioButton15);
+        jRadioButton15.setText("Baleadas");
+
+        buttonGroup6.add(jRadioButton16);
+        jRadioButton16.setText("Gatos");
+
+        jScrollPane7.setViewportView(Jlist2);
+
+        javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
+        jPanel18.setLayout(jPanel18Layout);
+        jPanel18Layout.setHorizontalGroup(
+            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel18Layout.createSequentialGroup()
+                .addGap(164, 164, 164)
+                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel18Layout.createSequentialGroup()
+                        .addComponent(jRadioButton15)
+                        .addGap(114, 114, 114)
+                        .addComponent(jRadioButton16)))
+                .addContainerGap(261, Short.MAX_VALUE))
+        );
+        jPanel18Layout.setVerticalGroup(
+            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel18Layout.createSequentialGroup()
+                .addGap(45, 45, 45)
+                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jRadioButton15)
+                    .addComponent(jRadioButton16))
+                .addGap(26, 26, 26)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(47, Short.MAX_VALUE))
+        );
+
+        jTabbedPane4.addTab("Ventas", jPanel18);
+
+        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
+        jPanel13.setLayout(jPanel13Layout);
+        jPanel13Layout.setHorizontalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jTabbedPane4)
+        );
+        jPanel13Layout.setVerticalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel13Layout.createSequentialGroup()
+                .addComponent(jTabbedPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 424, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 32, Short.MAX_VALUE))
+        );
+
+        jTabbedPane3.addTab("Reportes de Ordenes/Ventas", jPanel13);
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
@@ -2831,25 +2974,35 @@ int ticket=0;
         float total;
         Date fecha = null;
         float billete;
+        int fechaTemp;
         empleado = cb_baleadasEmpleado.getItemAt(cb_baleadasEmpleado.getSelectedIndex());
         cliente = cb_baleadasClientes.getItemAt(cb_baleadasClientes.getSelectedIndex());
         baleada = cb_baleadasBaleadas.getItemAt(cb_baleadasBaleadas.getSelectedIndex());
-        fecha = jf_fecha.getDate();
-        numArt = sp_numArt;
         
+        fecha = jf_fecha.getDate();
+        numArt = Integer.parseInt(sp_numArt.getValue().toString());
+        fechaTemp=fecha.getHours();
         total = numArt*baleada.getPrecio();
         billete=cliente.getDinero();
-        if (billete>=total&&progressBaleada<2){           
-            progressBaleada++;
+        
+        if(empleado.entrada<fechaTemp&&empleado.salida>fechaTemp){
+            
+        if (billete>=total&&progressBaleada.getValue()<=2){           
+             acum++;
+             tf_totalBaleadas.setText(""+total);
              ordenes.add(new Ordenes(cliente, empleado, total, fecha, numArt));
             JOptionPane.showMessageDialog(this, "La compra se ha efectuado exitosamente");
-        }else if(billete>=total&&progressBaleada==2){
+        }else if(billete>=total&&progressBaleada.getValue()==3){
                 ventas.add(new Ventas(cliente, empleado, total, fecha));
+                tf_totalBaleadas.setText(""+total);
                 JOptionPane.showMessageDialog(this, "La venta se ha efectuado exitosamente");
-                progressBaleada=0;
+                acum=0;
             }else{
             JOptionPane.showMessageDialog(this, "Este cliente no tiene suficiente dinero.");
         
+        }
+        }else{
+            JOptionPane.showMessageDialog(this, "El empleado no esta dentro de las horas de atencion");
         }
     }//GEN-LAST:event_bttn_ordenarBaleadaMouseClicked
 
@@ -2892,12 +3045,82 @@ int ticket=0;
 
     private void bttn_ordenarBaleadaStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_bttn_ordenarBaleadaStateChanged
         // TODO add your handling code here:
-        if (progressBaleada==2) {
+        if (progressBaleada.getValue()==3) {
             bttn_ordenarBaleada.setText("Venta");
         } else {
             bttn_ordenarBaleada.setText("Orden");
         }
     }//GEN-LAST:event_bttn_ordenarBaleadaStateChanged
+
+    private void jPanel15MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel15MouseEntered
+        // TODO add your handling code here:
+        DefaultComboBoxModel modelo = new DefaultComboBoxModel();
+            for (int i = 0; i < cliente.size(); i++) {
+                modelo.addElement(cliente.get(i));
+            }
+            cb_gatosCliente.setModel(modelo);
+            modelo = new DefaultComboBoxModel();
+            for (int i = 0; i < empleado.size(); i++) {
+                modelo.addElement(empleado.get(i));
+            }
+            cb_gatosEmpleados.setModel(modelo);
+            modelo = new DefaultComboBoxModel();
+            for (int i = 0; i < gatos.size(); i++) {
+                modelo.addElement(gatos.get(i));
+            }
+            cb_gatosGatos.setModel(modelo);
+            
+        
+    }//GEN-LAST:event_jPanel15MouseEntered
+
+    private void bttn_ordenarGatoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bttn_ordenarGatoMouseClicked
+        // TODO add your handling code here:
+        Empleado empleado;
+        Clientes cliente;
+        Gatos gato;
+        int numArt;
+        float total;
+        Date fecha = null;
+        float billete;
+        empleado = cb_gatosEmpleados.getItemAt(cb_baleadasEmpleado.getSelectedIndex());
+        cliente = cb_gatosCliente.getItemAt(cb_baleadasClientes.getSelectedIndex());
+        gato = cb_gatosGatos.getItemAt(cb_gatosGatos.getSelectedIndex());
+        fecha = fecha_gato.getDate();
+        numArt = Integer.parseInt(sp_numArt1.getValue().toString());
+        int fechatemp=fecha.getHours();
+        total = numArt*gato.getPrecio();
+        billete=cliente.getDinero();
+        
+        if(empleado.entrada<fechatemp&&empleado.salida>fechatemp){
+            
+        
+        if (billete>=total&&progressGatos.getValue()<=2){           
+             acum++;
+             tf_totalGatos.setText(""+total);
+             ordenes.add(new Ordenes(cliente, empleado, total, fecha, numArt));
+            JOptionPane.showMessageDialog(this, "La compra se ha efectuado exitosamente");
+        }else if(billete>=total&&progressGatos.getValue()==3){
+                ventas.add(new Ventas(cliente, empleado, total, fecha));
+                tf_totalGatos.setText(""+total);
+                JOptionPane.showMessageDialog(this, "La venta se ha efectuado exitosamente");
+                acum=0;
+            }else{
+            JOptionPane.showMessageDialog(this, "Este cliente no tiene suficiente dinero.");
+        
+        }
+        }else{
+            JOptionPane.showMessageDialog(this, "El empleado no esta dentro de las horas de atencion");
+        }
+    }//GEN-LAST:event_bttn_ordenarGatoMouseClicked
+
+    private void bttn_ordenarGatoStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_bttn_ordenarGatoStateChanged
+        // TODO add your handling code here:
+        if (progressGatos.getValue()==3) {
+            bttn_ordenarGato.setText("Venta");
+        } else {
+            bttn_ordenarGato.setText("Orden");
+        }
+    }//GEN-LAST:event_bttn_ordenarGatoStateChanged
 
     /**
      * @param args the command line arguments
@@ -2937,6 +3160,8 @@ int ticket=0;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton Familia1;
     private javax.swing.JRadioButton Familia2;
+    private javax.swing.JList<String> Jlist1;
+    private javax.swing.JList<String> Jlist2;
     private javax.swing.JTable Tabla;
     private javax.swing.JTable Tabla1;
     private javax.swing.JButton agregarEmpleado;
@@ -2947,20 +3172,26 @@ int ticket=0;
     private javax.swing.JButton bttn_colorFamilia;
     private javax.swing.JButton bttn_colorJefe;
     private javax.swing.JButton bttn_ordenarBaleada;
+    private javax.swing.JButton bttn_ordenarGato;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.ButtonGroup buttonGroup3;
     private javax.swing.ButtonGroup buttonGroup4;
+    private javax.swing.ButtonGroup buttonGroup5;
+    private javax.swing.ButtonGroup buttonGroup6;
     private javax.swing.JComboBox<Baleadas> cb_baleadasBaleadas;
     private javax.swing.JComboBox<Clientes> cb_baleadasClientes;
     private javax.swing.JComboBox<Empleado> cb_baleadasEmpleado;
     private javax.swing.JComboBox<String> cb_estado;
+    private javax.swing.JComboBox<Clientes> cb_gatosCliente;
+    private javax.swing.JComboBox<Empleado> cb_gatosEmpleados;
+    private javax.swing.JComboBox<Gatos> cb_gatosGatos;
     private javax.swing.JComboBox cb_hijo;
     private javax.swing.JComboBox<Empleado> cb_listaEmpleados;
     private javax.swing.JComboBox cb_padre;
     private javax.swing.JComboBox<String> cb_seccion;
     private javax.swing.JComboBox<String> cb_seccionJefe;
-    private com.toedter.calendar.JDateChooser fecha1;
+    private com.toedter.calendar.JDateChooser fecha_gato;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
@@ -2968,8 +3199,6 @@ int ticket=0;
     private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton16;
-    private javax.swing.JButton jButton18;
-    private javax.swing.JButton jButton19;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton20;
     private javax.swing.JButton jButton21;
@@ -2980,9 +3209,7 @@ int ticket=0;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
-    private javax.swing.JComboBox<Clientes> jComboBox1;
     private javax.swing.JComboBox<Empleado> jComboBox2;
-    private javax.swing.JComboBox<Empleado> jComboBox3;
     private javax.swing.JComboBox<Clientes> jComboBox4;
     private com.toedter.calendar.JDateChooser jDateChooser3;
     private javax.swing.JLabel jLabel1;
@@ -3043,6 +3270,8 @@ int ticket=0;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel60;
     private javax.swing.JLabel jLabel61;
+    private javax.swing.JLabel jLabel62;
+    private javax.swing.JLabel jLabel63;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -3057,9 +3286,12 @@ int ticket=0;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel16;
+    private javax.swing.JPanel jPanel17;
+    private javax.swing.JPanel jPanel18;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -3072,6 +3304,10 @@ int ticket=0;
     private javax.swing.JRadioButton jRadioButton10;
     private javax.swing.JRadioButton jRadioButton11;
     private javax.swing.JRadioButton jRadioButton12;
+    private javax.swing.JRadioButton jRadioButton13;
+    private javax.swing.JRadioButton jRadioButton14;
+    private javax.swing.JRadioButton jRadioButton15;
+    private javax.swing.JRadioButton jRadioButton16;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JRadioButton jRadioButton4;
@@ -3085,12 +3321,14 @@ int ticket=0;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JSpinner jSpinner2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTabbedPane jTabbedPane3;
+    private javax.swing.JTabbedPane jTabbedPane4;
     private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField8;
     private javax.swing.JTree jTree2;
     private javax.swing.JTree jTree3;
     private javax.swing.JDialog jd_baleadas;
@@ -3107,6 +3345,7 @@ int ticket=0;
     private javax.swing.JTextField precioGato;
     private javax.swing.JProgressBar progress;
     private javax.swing.JProgressBar progressBaleada;
+    private javax.swing.JProgressBar progressGatos;
     private javax.swing.JSpinner sp_entrada;
     private javax.swing.JSpinner sp_numArt;
     private javax.swing.JSpinner sp_numArt1;
@@ -3136,6 +3375,7 @@ int ticket=0;
     private javax.swing.JTextField tf_numerodeClientes;
     private javax.swing.JTextField tf_sueldo;
     private javax.swing.JTextField tf_totalBaleadas;
+    private javax.swing.JTextField tf_totalGatos;
     private javax.swing.JTree tree1;
     // End of variables declaration//GEN-END:variables
 ArrayList<Jefes> jefe= new ArrayList();
