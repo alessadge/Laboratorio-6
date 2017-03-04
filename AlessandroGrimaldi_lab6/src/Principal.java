@@ -129,7 +129,7 @@ int ticket=0;
         tf_id1 = new javax.swing.JTextField();
         tf_nacionalidad1 = new javax.swing.JTextField();
         tf_lugar1 = new javax.swing.JTextField();
-        bttn_color1 = new javax.swing.JButton();
+        bttn_colorFamilia = new javax.swing.JButton();
         jLabel44 = new javax.swing.JLabel();
         tf_nombre2 = new javax.swing.JTextField();
         jLabel45 = new javax.swing.JLabel();
@@ -931,12 +931,12 @@ int ticket=0;
             }
         });
 
-        bttn_color1.setBackground(new java.awt.Color(153, 153, 153));
-        bttn_color1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        bttn_color1.setText("Color");
-        bttn_color1.addMouseListener(new java.awt.event.MouseAdapter() {
+        bttn_colorFamilia.setBackground(new java.awt.Color(153, 153, 153));
+        bttn_colorFamilia.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        bttn_colorFamilia.setText("Color");
+        bttn_colorFamilia.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                bttn_color1MouseClicked(evt);
+                bttn_colorFamiliaMouseClicked(evt);
             }
         });
 
@@ -964,7 +964,7 @@ int ticket=0;
 
         jButton13.setBackground(new java.awt.Color(153, 153, 153));
         jButton13.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jButton13.setText("Agregar Baleada");
+        jButton13.setText("Agregar");
 
         javax.swing.GroupLayout jd_familiarLayout = new javax.swing.GroupLayout(jd_familiar.getContentPane());
         jd_familiar.getContentPane().setLayout(jd_familiarLayout);
@@ -988,10 +988,10 @@ int ticket=0;
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jd_familiarLayout.createSequentialGroup()
                             .addGap(28, 28, 28)
                             .addComponent(jLabel43))))
-                .addGap(30, 30, 30)
+                .addGap(27, 27, 27)
                 .addGroup(jd_familiarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jd_familiarLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(0, 1, Short.MAX_VALUE)
                         .addGroup(jd_familiarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jd_familiarLayout.createSequentialGroup()
                                 .addComponent(tf_lugar1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1011,29 +1011,29 @@ int ticket=0;
                                 .addComponent(jRadioButton4))
                             .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jd_familiarLayout.createSequentialGroup()
-                        .addGroup(jd_familiarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(bttn_color1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jd_familiarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jd_familiarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(bttn_colorFamilia, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jd_familiarLayout.createSequentialGroup()
+                                    .addGroup(jd_familiarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(tf_nombre2, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(tf_edad1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jd_familiarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jd_familiarLayout.createSequentialGroup()
+                                            .addGap(69, 69, 69)
+                                            .addComponent(jLabel44))
+                                        .addGroup(jd_familiarLayout.createSequentialGroup()
+                                            .addGap(87, 87, 87)
+                                            .addGroup(jd_familiarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addComponent(jRadioButton3)
+                                                .addComponent(jRadioButton1))
+                                            .addGap(38, 38, 38)
+                                            .addComponent(jRadioButton2)))))
                             .addGroup(jd_familiarLayout.createSequentialGroup()
-                                .addGroup(jd_familiarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(tf_nombre2, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(tf_edad1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jd_familiarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jd_familiarLayout.createSequentialGroup()
-                                        .addGap(69, 69, 69)
-                                        .addComponent(jLabel44))
-                                    .addGroup(jd_familiarLayout.createSequentialGroup()
-                                        .addGap(87, 87, 87)
-                                        .addGroup(jd_familiarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jRadioButton3)
-                                            .addComponent(jRadioButton1))
-                                        .addGap(38, 38, 38)
-                                        .addComponent(jRadioButton2)))))
+                                .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(247, 247, 247)))
                         .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap(94, Short.MAX_VALUE))
-            .addGroup(jd_familiarLayout.createSequentialGroup()
-                .addGap(204, 204, 204)
-                .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(96, Short.MAX_VALUE))
         );
         jd_familiarLayout.setVerticalGroup(
             jd_familiarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1074,10 +1074,10 @@ int ticket=0;
                         .addGap(28, 28, 28)
                         .addGroup(jd_familiarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel41)
-                            .addComponent(bttn_color1))
-                        .addGap(63, 63, 63)
+                            .addComponent(bttn_colorFamilia))
+                        .addGap(65, 65, 65)
                         .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(81, Short.MAX_VALUE))
+                        .addContainerGap(79, Short.MAX_VALUE))
                     .addGroup(jd_familiarLayout.createSequentialGroup()
                         .addGroup(jd_familiarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jRadioButton3)
@@ -1660,9 +1660,13 @@ int ticket=0;
         }
     }//GEN-LAST:event_cb_seccionJefeItemStateChanged
 
-    private void bttn_color1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bttn_color1MouseClicked
+    private void bttn_colorFamiliaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bttn_colorFamiliaMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_bttn_color1MouseClicked
+        Color c;
+        c=JColorChooser.showDialog(jMenu1, "Seleccione", Color.white);
+        bttn_colorFamilia.setForeground(c);
+        
+    }//GEN-LAST:event_bttn_colorFamiliaMouseClicked
 
     private void tf_lugar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_lugar1ActionPerformed
         // TODO add your handling code here:
@@ -1727,8 +1731,8 @@ int ticket=0;
     private javax.swing.JButton agregarEmpleado;
     private javax.swing.JButton agregarJefe;
     private javax.swing.JButton bttn_color;
-    private javax.swing.JButton bttn_color1;
     private javax.swing.JButton bttn_colorClientes;
+    private javax.swing.JButton bttn_colorFamilia;
     private javax.swing.JButton bttn_colorJefe;
     private javax.swing.JComboBox<String> cb_estado;
     private javax.swing.JComboBox<String> cb_listaEmpleados;
