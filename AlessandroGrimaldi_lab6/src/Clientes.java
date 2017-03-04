@@ -1,6 +1,7 @@
 
 import java.awt.Color;
 import java.util.ArrayList;
+import javax.swing.JTree;
 import javax.swing.tree.DefaultTreeModel;
 
 
@@ -10,9 +11,10 @@ public class Clientes extends Persona {
     private ArrayList<String> ordenes;
 
     public Clientes() {
+        super();
     }
 
-    public Clientes(int ticket, float dinero, ArrayList<String> ordenes, int edad, String ID, String nacionalidad, String lugar, String nombre, DefaultTreeModel arbol, Color color, Familiar familiar) {
+    public Clientes(int ticket, float dinero, ArrayList<String> ordenes, int edad, String ID, String nacionalidad, String lugar, String nombre, JTree arbol, String color, Familiar familiar) {
         super(edad, ID, nacionalidad, lugar, nombre, arbol, color, familiar);
         this.ticket = ticket;
         this.dinero = dinero;

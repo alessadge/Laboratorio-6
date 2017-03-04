@@ -3,6 +3,8 @@ import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.JColorChooser;
 import javax.swing.JOptionPane;
+import javax.swing.JTree;
+import javax.swing.tree.DefaultTreeModel;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -57,7 +59,7 @@ int ticket=0;
         sp_salida = new javax.swing.JSpinner();
         bttn_color = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTree1 = new javax.swing.JTree();
+        tree1 = new javax.swing.JTree();
         jd_cliente = new javax.swing.JDialog();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
@@ -141,6 +143,8 @@ int ticket=0;
         jRadioButton3 = new javax.swing.JRadioButton();
         jRadioButton4 = new javax.swing.JRadioButton();
         jButton13 = new javax.swing.JButton();
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jPanel8 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
@@ -249,6 +253,11 @@ int ticket=0;
         jButton7.setBackground(new java.awt.Color(153, 153, 153));
         jButton7.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jButton7.setText("Agregar");
+        jButton7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton7MouseClicked(evt);
+            }
+        });
 
         bttn_color.setBackground(new java.awt.Color(153, 153, 153));
         bttn_color.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -260,8 +269,8 @@ int ticket=0;
         });
 
         javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("root");
-        jTree1.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
-        jScrollPane1.setViewportView(jTree1);
+        tree1.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        jScrollPane1.setViewportView(tree1);
 
         javax.swing.GroupLayout jd_empleadosLayout = new javax.swing.GroupLayout(jd_empleados.getContentPane());
         jd_empleados.getContentPane().setLayout(jd_empleadosLayout);
@@ -954,12 +963,18 @@ int ticket=0;
 
         jButton8.setText("Agregar hijo");
 
+        buttonGroup1.add(jRadioButton1);
+        jRadioButton1.setSelected(true);
         jRadioButton1.setText("Familia");
 
+        buttonGroup1.add(jRadioButton2);
         jRadioButton2.setText("Persona");
 
+        buttonGroup2.add(jRadioButton3);
+        jRadioButton3.setSelected(true);
         jRadioButton3.setText("Familia");
 
+        buttonGroup2.add(jRadioButton4);
         jRadioButton4.setText("Persona");
 
         jButton13.setBackground(new java.awt.Color(153, 153, 153));
@@ -1333,7 +1348,7 @@ int ticket=0;
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 707, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1)
                 .addContainerGap())
         );
         jPanel8Layout.setVerticalGroup(
@@ -1582,6 +1597,31 @@ int ticket=0;
     private void jButton9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton9MouseClicked
         // TODO add your handling code here:
         ticket++;
+        String nombre,id,nacionalidad,lugar,color = null,estado,seccion;
+        int edad,entrada,salida;
+        float sueldo;
+        JTree model = tree1;
+
+        sueldo=Float.parseFloat(tf_dineroClientes.getText());
+        nombre = tf_nombreClientes.getText();
+        edad = Integer.parseInt(tf_edadClientes.getText());
+        id=tf_idClientes.getText();
+        nacionalidad=tf_nacionalidadClientes.getText();
+        lugar=tf_lugarClientes.getText();
+        if(bttn_colorClientes.getBackground()== Color.BLACK){
+            color="negro";
+        }else if(bttn_colorClientes.getBackground()== Color.WHITE){
+            color="blanco";
+        }
+        persona.add(new Clientes(ticket,sueldo,null,edad,id,nacionalidad,lugar,nombre,model,color,null));
+        cliente.add(new Clientes(ticket,sueldo,null,edad,id,nacionalidad,lugar,nombre,model,color,null));
+        JOptionPane.showMessageDialog(this, "Se agrego un cliente exitosamente!");
+        tf_dineroClientes.setText("");
+        tf_nombreClientes.setText("");
+        tf_edadClientes.setText("");
+        tf_idClientes.setText("");
+        tf_nacionalidadClientes.setText("");
+        tf_lugarClientes.setText("");
         
     }//GEN-LAST:event_jButton9MouseClicked
 
@@ -1692,6 +1732,45 @@ int ticket=0;
         // TODO add your handling code here:
     }//GEN-LAST:event_tf_nombreJefe5ActionPerformed
 
+    private void jButton7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton7MouseClicked
+        // TODO add your handling code here:
+        String nombre,id,nacionalidad,lugar,color = null,estado,seccion;
+        int edad,entrada,salida;
+        float sueldo;
+        JTree model = tree1;
+
+        sueldo=Float.parseFloat(tf_sueldo.getText());
+        nombre = tf_nombre.getText();
+        edad = Integer.parseInt(tf_edad.getText());
+        id=tf_id.getText();
+        nacionalidad=tf_nacionalidad.getText();
+        lugar=tf_lugar.getText();
+        if(bttn_color.getBackground()== Color.BLACK){
+            color="negro";
+        }else if(bttn_color.getBackground()== Color.WHITE){
+            color="blanco";
+        }
+        estado=cb_estado.getItemAt(cb_estado.getSelectedIndex());
+        seccion=cb_seccion.getItemAt(cb_seccion.getSelectedIndex());
+        entrada=Integer.parseInt(sp_entrada.getValue().toString());
+        salida=Integer.parseInt(sp_salida.getValue().toString());
+        persona.add(new Empleado(seccion, estado, entrada, salida, sueldo, edad, id, nacionalidad, lugar, nombre, model, color, null));
+        empleado.add(new Empleado(seccion, estado, entrada, salida, sueldo, edad, id, nacionalidad, lugar, nombre, model, color, null));
+        JOptionPane.showMessageDialog(this, "Se agrego un empleado exitosamente!");
+        tf_sueldo.setText("");
+        tf_nombre.setText("");
+        tf_edad.setText("");
+        tf_id.setText("");
+        tf_nacionalidad.setText("");
+        tf_lugar.setText("");
+        sp_entrada.setValue(0);
+        sp_salida.setValue(0);
+        
+        
+        
+        
+    }//GEN-LAST:event_jButton7MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -1734,6 +1813,8 @@ int ticket=0;
     private javax.swing.JButton bttn_colorClientes;
     private javax.swing.JButton bttn_colorFamilia;
     private javax.swing.JButton bttn_colorJefe;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JComboBox<String> cb_estado;
     private javax.swing.JComboBox<String> cb_listaEmpleados;
     private javax.swing.JComboBox<String> cb_seccion;
@@ -1824,7 +1905,6 @@ int ticket=0;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
-    private javax.swing.JTree jTree1;
     private javax.swing.JTree jTree2;
     private javax.swing.JTree jTree3;
     private javax.swing.JDialog jd_baleadas;
@@ -1865,7 +1945,10 @@ int ticket=0;
     private javax.swing.JTextField tf_nombreJefe5;
     private javax.swing.JTextField tf_numerodeClientes;
     private javax.swing.JTextField tf_sueldo;
+    private javax.swing.JTree tree1;
     // End of variables declaration//GEN-END:variables
 ArrayList<Jefes> jefe= new ArrayList();
-
+ArrayList<Persona> persona=new ArrayList();
+ArrayList<Empleado> empleado = new ArrayList();
+ArrayList<Clientes> cliente=new ArrayList();
 }

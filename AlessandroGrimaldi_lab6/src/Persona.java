@@ -1,6 +1,7 @@
 
 import java.awt.Color;
 import java.util.ArrayList;
+import javax.swing.JTree;
 import javax.swing.tree.DefaultTreeModel;
 
 
@@ -10,14 +11,14 @@ public class Persona {
     protected String ID;
     protected String nacionalidad;
     protected String lugar,nombre;
-    protected DefaultTreeModel arbol;
-    protected Color color;
+    protected JTree arbol;
+    protected String color;
     protected ArrayList<Familiar> familiares;
 
     public Persona() {
     }
 
-    public Persona(int edad, String ID, String nacionalidad, String lugar, String nombre, DefaultTreeModel arbol, Color color, Familiar familiar) {
+    public Persona(int edad, String ID, String nacionalidad, String lugar, String nombre, JTree arbol, String color, Familiar familiar) {
         this.edad = edad;
         this.ID = ID;
         this.nacionalidad = nacionalidad;
@@ -68,19 +69,19 @@ public class Persona {
         this.nombre = nombre;
     }
 
-    public DefaultTreeModel getArbol() {
+    public JTree getArbol() {
         return arbol;
     }
 
-    public void setArbol(DefaultTreeModel arbol) {
+    public void setArbol(JTree arbol) {
         this.arbol = arbol;
     }
 
-    public Color getColor() {
+    public String getColor() {
         return color;
     }
 
-    public void setColor(Color color) {
+    public void setColor(String color) {
         this.color = color;
     }
 
