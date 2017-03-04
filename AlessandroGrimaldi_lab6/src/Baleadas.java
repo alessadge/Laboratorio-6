@@ -8,7 +8,7 @@ public class Baleadas extends Articulos {
     public Baleadas() {
     }
 
-    public Baleadas(ArrayList<String> ingredientes, int precio) {
+    public Baleadas(ArrayList<String> ingredientes, float precio) {
         super(precio);
         this.ingredientes = ingredientes;
     }

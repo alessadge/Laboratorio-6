@@ -6,32 +6,32 @@ import javax.swing.tree.DefaultTreeModel;
 
 
 class Familiar extends Persona {
-    private ArrayList<Familiar> hijos;
-    private Familiar padre;
+    private ArrayList hijos;
+    private Object padre;
 
     public Familiar() {
         super();
     }
 
-    public Familiar(ArrayList<Familiar> hijos, Familiar padre, int edad, String ID, String nacionalidad, String lugar, String nombre, JTree arbol, String color, Familiar familiar) {
+    public Familiar(ArrayList hijos, Object padre, int edad, String ID, String nacionalidad, String lugar, String nombre, JTree arbol, String color, Familiar familiar) {
         super(edad, ID, nacionalidad, lugar, nombre, arbol, color, familiar);
         this.hijos = hijos;
         this.padre = padre;
     }
 
-    public ArrayList<Familiar> getHijos() {
+    public ArrayList getHijos() {
         return hijos;
     }
 
-    public void setHijos(ArrayList<Familiar> hijos) {
+    public void setHijos(ArrayList hijos) {
         this.hijos = hijos;
     }
 
-    public Familiar getPadre() {
+    public Object getPadre() {
         return padre;
     }
 
-    public void setPadre(Familiar padre) {
+    public void setPadre(Object padre) {
         this.padre = padre;
     }
 

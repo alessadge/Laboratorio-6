@@ -5,7 +5,7 @@ public class Articulos {
     public Articulos() {
     }
 
-    public Articulos(int precio) {
+    public Articulos(float precio) {
         this.precio = precio;
     }
 

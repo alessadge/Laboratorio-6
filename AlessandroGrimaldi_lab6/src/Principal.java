@@ -1,6 +1,7 @@
 
 import java.awt.Color;
 import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JColorChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTree;
@@ -96,10 +97,8 @@ int ticket=0;
         bttn_colorJefe = new javax.swing.JButton();
         jLabel28 = new javax.swing.JLabel();
         cb_seccionJefe = new javax.swing.JComboBox<>();
-        jLabel29 = new javax.swing.JLabel();
         jLabel30 = new javax.swing.JLabel();
         tf_numerodeClientes = new javax.swing.JTextField();
-        tf_ganancia = new javax.swing.JTextField();
         jLabel31 = new javax.swing.JLabel();
         cb_listaEmpleados = new javax.swing.JComboBox<>();
         agregarEmpleado = new javax.swing.JButton();
@@ -107,18 +106,18 @@ int ticket=0;
         jLabel37 = new javax.swing.JLabel();
         jd_gato = new javax.swing.JDialog();
         jLabel32 = new javax.swing.JLabel();
-        tf_nombreJefe1 = new javax.swing.JTextField();
+        precioGato = new javax.swing.JTextField();
         jLabel33 = new javax.swing.JLabel();
         jLabel34 = new javax.swing.JLabel();
-        tf_nombreJefe2 = new javax.swing.JTextField();
-        tf_nombreJefe3 = new javax.swing.JTextField();
+        peso = new javax.swing.JTextField();
+        altura = new javax.swing.JTextField();
         jButton10 = new javax.swing.JButton();
         jd_baleadas = new javax.swing.JDialog();
         jLabel35 = new javax.swing.JLabel();
-        tf_nombreJefe4 = new javax.swing.JTextField();
+        precioBaleada = new javax.swing.JTextField();
         jLabel36 = new javax.swing.JLabel();
         jButton11 = new javax.swing.JButton();
-        tf_nombreJefe5 = new javax.swing.JTextField();
+        tf_ingrediente = new javax.swing.JTextField();
         jButton12 = new javax.swing.JButton();
         jd_familiar = new javax.swing.JDialog();
         jLabel38 = new javax.swing.JLabel();
@@ -127,21 +126,21 @@ int ticket=0;
         jLabel41 = new javax.swing.JLabel();
         jLabel42 = new javax.swing.JLabel();
         jLabel43 = new javax.swing.JLabel();
-        tf_edad1 = new javax.swing.JTextField();
-        tf_id1 = new javax.swing.JTextField();
-        tf_nacionalidad1 = new javax.swing.JTextField();
-        tf_lugar1 = new javax.swing.JTextField();
+        tf_edadFamilia = new javax.swing.JTextField();
+        tf_idFamilia = new javax.swing.JTextField();
+        tf_nacionalidadFamilia = new javax.swing.JTextField();
+        tf_lugarFamilia = new javax.swing.JTextField();
         bttn_colorFamilia = new javax.swing.JButton();
         jLabel44 = new javax.swing.JLabel();
-        tf_nombre2 = new javax.swing.JTextField();
+        tf_nombreFamilia = new javax.swing.JTextField();
         jLabel45 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        cb_hijo = new javax.swing.JComboBox();
         jButton8 = new javax.swing.JButton();
-        jComboBox3 = new javax.swing.JComboBox<>();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
-        jRadioButton4 = new javax.swing.JRadioButton();
+        cb_padre = new javax.swing.JComboBox();
+        Familia1 = new javax.swing.JRadioButton();
+        persona1 = new javax.swing.JRadioButton();
+        Familia2 = new javax.swing.JRadioButton();
+        persona2 = new javax.swing.JRadioButton();
         jButton13 = new javax.swing.JButton();
         buttonGroup1 = new javax.swing.ButtonGroup();
         buttonGroup2 = new javax.swing.ButtonGroup();
@@ -531,6 +530,11 @@ int ticket=0;
         );
 
         jd_jefe.setTitle("Agregar Jefe");
+        jd_jefe.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jd_jefeMouseEntered(evt);
+            }
+        });
 
         jLabel23.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel23.setText("Nacionalidad:");
@@ -612,9 +616,6 @@ int ticket=0;
             }
         });
 
-        jLabel29.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        jLabel29.setText("Ganancia:");
-
         jLabel30.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel30.setText("Numero clientes:");
 
@@ -624,14 +625,14 @@ int ticket=0;
             }
         });
 
-        tf_ganancia.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_gananciaActionPerformed(evt);
-            }
-        });
-
         jLabel31.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel31.setText("Lista empleados:");
+
+        cb_listaEmpleados.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cb_listaEmpleadosItemStateChanged(evt);
+            }
+        });
 
         agregarEmpleado.setText("Agregar empleado");
         agregarEmpleado.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -673,13 +674,11 @@ int ticket=0;
                         .addGap(52, 52, 52)
                         .addGroup(jd_jefeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel30)
-                            .addComponent(jLabel29)
                             .addComponent(jLabel31))
                         .addGap(18, 18, 18)
                         .addGroup(jd_jefeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(agregarEmpleado, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
                             .addComponent(tf_numerodeClientes)
-                            .addComponent(tf_ganancia)
                             .addComponent(cb_listaEmpleados, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(33, 33, 33))
                     .addGroup(jd_jefeLayout.createSequentialGroup()
@@ -723,14 +722,13 @@ int ticket=0;
                 .addGroup(jd_jefeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel24)
                     .addComponent(tf_edadJefe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel29)
-                    .addComponent(tf_ganancia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(22, 22, 22)
+                    .addComponent(jLabel31)
+                    .addComponent(cb_listaEmpleados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
                 .addGroup(jd_jefeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel27)
                     .addComponent(tf_idJefe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel31)
-                    .addComponent(cb_listaEmpleados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(agregarEmpleado))
                 .addGroup(jd_jefeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jd_jefeLayout.createSequentialGroup()
                         .addGap(23, 23, 23)
@@ -745,7 +743,7 @@ int ticket=0;
                         .addGroup(jd_jefeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel21)
                             .addComponent(bttn_colorJefe))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                         .addGroup(jd_jefeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel28)
                             .addComponent(cb_seccionJefe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -753,9 +751,7 @@ int ticket=0;
                         .addComponent(agregarJefe, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(33, 33, 33))
                     .addGroup(jd_jefeLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
-                        .addComponent(agregarEmpleado)
-                        .addGap(29, 29, 29)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())))
         );
@@ -765,9 +761,9 @@ int ticket=0;
         jLabel32.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel32.setText("Precio:");
 
-        tf_nombreJefe1.addActionListener(new java.awt.event.ActionListener() {
+        precioGato.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_nombreJefe1ActionPerformed(evt);
+                precioGatoActionPerformed(evt);
             }
         });
 
@@ -777,21 +773,26 @@ int ticket=0;
         jLabel34.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel34.setText("Altura:");
 
-        tf_nombreJefe2.addActionListener(new java.awt.event.ActionListener() {
+        peso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_nombreJefe2ActionPerformed(evt);
+                pesoActionPerformed(evt);
             }
         });
 
-        tf_nombreJefe3.addActionListener(new java.awt.event.ActionListener() {
+        altura.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_nombreJefe3ActionPerformed(evt);
+                alturaActionPerformed(evt);
             }
         });
 
         jButton10.setBackground(new java.awt.Color(153, 153, 153));
         jButton10.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jButton10.setText("Agregar");
+        jButton10.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton10MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jd_gatoLayout = new javax.swing.GroupLayout(jd_gato.getContentPane());
         jd_gato.getContentPane().setLayout(jd_gatoLayout);
@@ -809,15 +810,15 @@ int ticket=0;
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jd_gatoLayout.createSequentialGroup()
                                 .addComponent(jLabel34)
                                 .addGap(31, 31, 31)
-                                .addComponent(tf_nombreJefe3))
+                                .addComponent(altura))
                             .addGroup(jd_gatoLayout.createSequentialGroup()
                                 .addComponent(jLabel32)
                                 .addGap(32, 32, 32)
-                                .addComponent(tf_nombreJefe1))
+                                .addComponent(precioGato))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jd_gatoLayout.createSequentialGroup()
                                 .addComponent(jLabel33)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
-                                .addComponent(tf_nombreJefe2, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(peso, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(233, 233, 233))))
         );
         jd_gatoLayout.setVerticalGroup(
@@ -826,15 +827,15 @@ int ticket=0;
                 .addGap(77, 77, 77)
                 .addGroup(jd_gatoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel32)
-                    .addComponent(tf_nombreJefe1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(precioGato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(32, 32, 32)
                 .addGroup(jd_gatoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel33)
-                    .addComponent(tf_nombreJefe2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(peso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addGroup(jd_gatoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel34)
-                    .addComponent(tf_nombreJefe3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(altura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(69, 69, 69)
                 .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(70, Short.MAX_VALUE))
@@ -845,9 +846,9 @@ int ticket=0;
         jLabel35.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel35.setText("Precio:");
 
-        tf_nombreJefe4.addActionListener(new java.awt.event.ActionListener() {
+        precioBaleada.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_nombreJefe4ActionPerformed(evt);
+                precioBaleadaActionPerformed(evt);
             }
         });
 
@@ -857,14 +858,24 @@ int ticket=0;
         jButton11.setBackground(new java.awt.Color(153, 153, 153));
         jButton11.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jButton11.setText("Agregar Baleada");
+        jButton11.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton11MouseClicked(evt);
+            }
+        });
 
-        tf_nombreJefe5.addActionListener(new java.awt.event.ActionListener() {
+        tf_ingrediente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_nombreJefe5ActionPerformed(evt);
+                tf_ingredienteActionPerformed(evt);
             }
         });
 
         jButton12.setText("Agregar Ingrediente");
+        jButton12.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton12MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jd_baleadasLayout = new javax.swing.GroupLayout(jd_baleadas.getContentPane());
         jd_baleadas.getContentPane().setLayout(jd_baleadasLayout);
@@ -878,8 +889,8 @@ int ticket=0;
                 .addGap(30, 30, 30)
                 .addGroup(jd_baleadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tf_nombreJefe4, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(tf_nombreJefe5)
+                    .addComponent(precioBaleada, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(tf_ingrediente)
                     .addComponent(jButton12, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE))
                 .addContainerGap(202, Short.MAX_VALUE))
         );
@@ -888,12 +899,12 @@ int ticket=0;
             .addGroup(jd_baleadasLayout.createSequentialGroup()
                 .addGap(76, 76, 76)
                 .addGroup(jd_baleadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tf_nombreJefe4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(precioBaleada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel35))
                 .addGap(31, 31, 31)
                 .addGroup(jd_baleadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel36)
-                    .addComponent(tf_nombreJefe5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tf_ingrediente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton12)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
@@ -902,6 +913,11 @@ int ticket=0;
         );
 
         jd_familiar.setTitle("Agregar Familiar");
+        jd_familiar.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                jd_familiarMouseDragged(evt);
+            }
+        });
 
         jLabel38.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel38.setText("Lugar de nacimiento:");
@@ -921,27 +937,27 @@ int ticket=0;
         jLabel43.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel43.setText("ID:");
 
-        tf_edad1.addActionListener(new java.awt.event.ActionListener() {
+        tf_edadFamilia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_edad1ActionPerformed(evt);
+                tf_edadFamiliaActionPerformed(evt);
             }
         });
 
-        tf_id1.addActionListener(new java.awt.event.ActionListener() {
+        tf_idFamilia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_id1ActionPerformed(evt);
+                tf_idFamiliaActionPerformed(evt);
             }
         });
 
-        tf_nacionalidad1.addActionListener(new java.awt.event.ActionListener() {
+        tf_nacionalidadFamilia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_nacionalidad1ActionPerformed(evt);
+                tf_nacionalidadFamiliaActionPerformed(evt);
             }
         });
 
-        tf_lugar1.addActionListener(new java.awt.event.ActionListener() {
+        tf_lugarFamilia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_lugar1ActionPerformed(evt);
+                tf_lugarFamiliaActionPerformed(evt);
             }
         });
 
@@ -957,9 +973,9 @@ int ticket=0;
         jLabel44.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel44.setText("Padre:");
 
-        tf_nombre2.addActionListener(new java.awt.event.ActionListener() {
+        tf_nombreFamilia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_nombre2ActionPerformed(evt);
+                tf_nombreFamiliaActionPerformed(evt);
             }
         });
 
@@ -967,24 +983,54 @@ int ticket=0;
         jLabel45.setText("Hijos:");
 
         jButton8.setText("Agregar hijo");
+        jButton8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton8MouseClicked(evt);
+            }
+        });
 
-        buttonGroup1.add(jRadioButton1);
-        jRadioButton1.setSelected(true);
-        jRadioButton1.setText("Familia");
+        buttonGroup1.add(Familia1);
+        Familia1.setSelected(true);
+        Familia1.setText("Familia");
+        Familia1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Familia1ActionPerformed(evt);
+            }
+        });
 
-        buttonGroup1.add(jRadioButton2);
-        jRadioButton2.setText("Persona");
+        buttonGroup1.add(persona1);
+        persona1.setText("Persona");
+        persona1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                persona1ActionPerformed(evt);
+            }
+        });
 
-        buttonGroup2.add(jRadioButton3);
-        jRadioButton3.setSelected(true);
-        jRadioButton3.setText("Familia");
+        buttonGroup2.add(Familia2);
+        Familia2.setSelected(true);
+        Familia2.setText("Familia");
+        Familia2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Familia2ActionPerformed(evt);
+            }
+        });
 
-        buttonGroup2.add(jRadioButton4);
-        jRadioButton4.setText("Persona");
+        buttonGroup2.add(persona2);
+        persona2.setText("Persona");
+        persona2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                persona2ActionPerformed(evt);
+            }
+        });
 
         jButton13.setBackground(new java.awt.Color(153, 153, 153));
         jButton13.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jButton13.setText("Agregar");
+        jButton13.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton13MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jd_familiarLayout = new javax.swing.GroupLayout(jd_familiar.getContentPane());
         jd_familiar.getContentPane().setLayout(jd_familiarLayout);
@@ -1014,21 +1060,21 @@ int ticket=0;
                         .addGap(0, 1, Short.MAX_VALUE)
                         .addGroup(jd_familiarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jd_familiarLayout.createSequentialGroup()
-                                .addComponent(tf_lugar1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(tf_lugarFamilia, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel45)
                                 .addGap(51, 51, 51))
                             .addGroup(jd_familiarLayout.createSequentialGroup()
                                 .addGroup(jd_familiarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(tf_id1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(tf_nacionalidad1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(tf_idFamilia, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tf_nacionalidadFamilia, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(164, 164, 164)))
                         .addGroup(jd_familiarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cb_hijo, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cb_padre, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jd_familiarLayout.createSequentialGroup()
                                 .addGap(18, 18, 18)
-                                .addComponent(jRadioButton4))
+                                .addComponent(persona2))
                             .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jd_familiarLayout.createSequentialGroup()
                         .addGroup(jd_familiarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -1036,8 +1082,8 @@ int ticket=0;
                                 .addComponent(bttn_colorFamilia, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(jd_familiarLayout.createSequentialGroup()
                                     .addGroup(jd_familiarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(tf_nombre2, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(tf_edad1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(tf_nombreFamilia, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(tf_edadFamilia, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(jd_familiarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(jd_familiarLayout.createSequentialGroup()
                                             .addGap(69, 69, 69)
@@ -1045,10 +1091,10 @@ int ticket=0;
                                         .addGroup(jd_familiarLayout.createSequentialGroup()
                                             .addGap(87, 87, 87)
                                             .addGroup(jd_familiarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                .addComponent(jRadioButton3)
-                                                .addComponent(jRadioButton1))
+                                                .addComponent(Familia2)
+                                                .addComponent(Familia1))
                                             .addGap(38, 38, 38)
-                                            .addComponent(jRadioButton2)))))
+                                            .addComponent(persona1)))))
                             .addGroup(jd_familiarLayout.createSequentialGroup()
                                 .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(247, 247, 247)))
@@ -1063,34 +1109,34 @@ int ticket=0;
                     .addGroup(jd_familiarLayout.createSequentialGroup()
                         .addGroup(jd_familiarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel39)
-                            .addComponent(tf_nombre2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(tf_nombreFamilia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(24, 24, 24)
                         .addGroup(jd_familiarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel42)
-                            .addComponent(tf_edad1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(tf_edadFamilia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(22, 22, 22))
                     .addGroup(jd_familiarLayout.createSequentialGroup()
                         .addGroup(jd_familiarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jRadioButton2)
-                            .addComponent(jRadioButton1))
+                            .addComponent(persona1)
+                            .addComponent(Familia1))
                         .addGap(27, 27, 27)
                         .addGroup(jd_familiarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel44)
-                            .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cb_padre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(9, 9, 9)))
                 .addGroup(jd_familiarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jd_familiarLayout.createSequentialGroup()
                         .addGroup(jd_familiarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel43)
-                            .addComponent(tf_id1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(tf_idFamilia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(22, 22, 22)
                         .addGroup(jd_familiarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel40)
-                            .addComponent(tf_nacionalidad1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(tf_nacionalidadFamilia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(26, 26, 26)
                         .addGroup(jd_familiarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel38)
-                            .addComponent(tf_lugar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(tf_lugarFamilia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(28, 28, 28)
                         .addGroup(jd_familiarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel41)
@@ -1100,12 +1146,12 @@ int ticket=0;
                         .addContainerGap(79, Short.MAX_VALUE))
                     .addGroup(jd_familiarLayout.createSequentialGroup()
                         .addGroup(jd_familiarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jRadioButton3)
-                            .addComponent(jRadioButton4))
+                            .addComponent(Familia2)
+                            .addComponent(persona2))
                         .addGap(26, 26, 26)
                         .addGroup(jd_familiarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel45)
-                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cb_hijo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton8)
                         .addGap(210, 210, 210))))
@@ -1510,6 +1556,14 @@ int ticket=0;
         jd_jefe.pack();
         jd_jefe.setLocationRelativeTo(this);
         jd_jefe.setVisible(true);
+                   DefaultComboBoxModel modelo = new DefaultComboBoxModel();
+ if(jButton3.isSelected()){
+            for (int i = 0; i < empleado.size(); i++) {
+                modelo.addElement(empleado.get(i));
+            }
+            cb_listaEmpleados.setModel(modelo);
+        }
+        
     }//GEN-LAST:event_jButton3MouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -1663,25 +1717,21 @@ int ticket=0;
         // TODO add your handling code here:
     }//GEN-LAST:event_tf_numerodeClientesActionPerformed
 
-    private void tf_gananciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_gananciaActionPerformed
+    private void precioGatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_precioGatoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tf_gananciaActionPerformed
+    }//GEN-LAST:event_precioGatoActionPerformed
 
-    private void tf_nombreJefe1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_nombreJefe1ActionPerformed
+    private void pesoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pesoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tf_nombreJefe1ActionPerformed
+    }//GEN-LAST:event_pesoActionPerformed
 
-    private void tf_nombreJefe2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_nombreJefe2ActionPerformed
+    private void alturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alturaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tf_nombreJefe2ActionPerformed
+    }//GEN-LAST:event_alturaActionPerformed
 
-    private void tf_nombreJefe3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_nombreJefe3ActionPerformed
+    private void precioBaleadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_precioBaleadaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tf_nombreJefe3ActionPerformed
-
-    private void tf_nombreJefe4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_nombreJefe4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tf_nombreJefe4ActionPerformed
+    }//GEN-LAST:event_precioBaleadaActionPerformed
 
     private void agregarJefeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_agregarJefeMouseClicked
         // TODO add your handling code here
@@ -1692,7 +1742,6 @@ int ticket=0;
         ArrayList<Empleado> empleado;
         JTree model = tree1;
 
-        sueldo=Float.parseFloat(tf_ganancia.getText());
         nombre = tf_nombreJefe.getText();
         edad = Integer.parseInt(tf_edadJefe.getText());
         id=tf_idJefe.getText();
@@ -1706,10 +1755,10 @@ int ticket=0;
         seccion=cb_seccionJefe.getItemAt(cb_seccionJefe.getSelectedIndex());
         numeroClientes=Integer.parseInt(tf_numerodeClientes.getText());
                 
-        persona.add(new Jefes(seccion, numeroClientes, sueldo, edad, id, nacionalidad, lugar, nombre, model, color, null));
-        jefe.add(new Jefes(seccion, numeroClientes, sueldo, edad, id, nacionalidad, lugar, nombre, model, color, null));
+        persona.add(new Jefes(seccion,temporal, numeroClientes,  edad, id, nacionalidad, lugar, nombre, model, color, null));
+        jefe.add(new Jefes(seccion,temporal, numeroClientes,  edad, id, nacionalidad, lugar, nombre, model, color, null));
+        temporal.clear();
         JOptionPane.showMessageDialog(this, "Se agrego un jefe exitosamente!");
-        tf_ganancia.setText("");
         tf_nombreJefe.setText("");
         tf_edadJefe.setText("");
         tf_idJefe.setText("");
@@ -1739,29 +1788,29 @@ int ticket=0;
         
     }//GEN-LAST:event_bttn_colorFamiliaMouseClicked
 
-    private void tf_lugar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_lugar1ActionPerformed
+    private void tf_lugarFamiliaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_lugarFamiliaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tf_lugar1ActionPerformed
+    }//GEN-LAST:event_tf_lugarFamiliaActionPerformed
 
-    private void tf_nacionalidad1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_nacionalidad1ActionPerformed
+    private void tf_nacionalidadFamiliaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_nacionalidadFamiliaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tf_nacionalidad1ActionPerformed
+    }//GEN-LAST:event_tf_nacionalidadFamiliaActionPerformed
 
-    private void tf_id1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_id1ActionPerformed
+    private void tf_idFamiliaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_idFamiliaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tf_id1ActionPerformed
+    }//GEN-LAST:event_tf_idFamiliaActionPerformed
 
-    private void tf_edad1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_edad1ActionPerformed
+    private void tf_edadFamiliaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_edadFamiliaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tf_edad1ActionPerformed
+    }//GEN-LAST:event_tf_edadFamiliaActionPerformed
 
-    private void tf_nombre2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_nombre2ActionPerformed
+    private void tf_nombreFamiliaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_nombreFamiliaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tf_nombre2ActionPerformed
+    }//GEN-LAST:event_tf_nombreFamiliaActionPerformed
 
-    private void tf_nombreJefe5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_nombreJefe5ActionPerformed
+    private void tf_ingredienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_ingredienteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tf_nombreJefe5ActionPerformed
+    }//GEN-LAST:event_tf_ingredienteActionPerformed
 
     private void jButton7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton7MouseClicked
         // TODO add your handling code here:
@@ -1806,8 +1855,137 @@ int ticket=0;
         // TODO add your handling code here:
         Empleado empleado;
         empleado=cb_listaEmpleados.getItemAt(cb_listaEmpleados.getSelectedIndex());
-        
+        temporal.add(empleado);
+        JOptionPane.showMessageDialog(this, "Se agrego el empleado exitosamente.");
     }//GEN-LAST:event_agregarEmpleadoMouseClicked
+
+    private void jButton10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton10MouseClicked
+        // TODO add your handling code here:
+        float precio;
+        int peso1, altura1;
+        precio=Float.parseFloat(precioGato.getText());
+        peso1=Integer.parseInt(peso.getText());
+        altura1=Integer.parseInt(altura.getText());
+        gatos.add(new Gatos(peso1,altura1,precio));
+        articulos.add(new Gatos(peso1,altura1,precio));
+        precioGato.setText("");
+        peso.setText("");
+        altura.setText("");
+    }//GEN-LAST:event_jButton10MouseClicked
+
+    private void jButton12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton12MouseClicked
+        // TODO add your handling code here:
+        String ingre;
+        ingre = tf_ingrediente.getText();
+        ingreTemporal.add(ingre);
+        tf_ingrediente.setText("");
+        
+    }//GEN-LAST:event_jButton12MouseClicked
+
+    private void jButton11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton11MouseClicked
+        // TODO add your handling code here:
+        float precio;
+        precio=Float.parseFloat(precioBaleada.getText());
+        articulos.add(new Baleadas(ingreTemporal,precio));
+        baleadas.add(new Baleadas(ingreTemporal,precio));
+        ingreTemporal.clear();
+        precioBaleada.setText("");
+    }//GEN-LAST:event_jButton11MouseClicked
+
+    private void cb_listaEmpleadosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cb_listaEmpleadosItemStateChanged
+        // TODO add your handling code here:
+        for (Empleado t : empleado) {
+            cb_listaEmpleados.addItem(t);
+        }
+    }//GEN-LAST:event_cb_listaEmpleadosItemStateChanged
+
+    private void jd_jefeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jd_jefeMouseEntered
+        // TODO add your handling code here:
+        DefaultComboBoxModel modelo = new DefaultComboBoxModel();
+            for (int i = 0; i < empleado.size(); i++) {
+                modelo.addElement(empleado.get(i));
+            }
+            cb_listaEmpleados.setModel(modelo);
+    }//GEN-LAST:event_jd_jefeMouseEntered
+
+    private void jd_familiarMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jd_familiarMouseDragged
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jd_familiarMouseDragged
+
+    private void Familia1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Familia1ActionPerformed
+        // TODO add your handling code here:
+        DefaultComboBoxModel modelo = new DefaultComboBoxModel();
+            for (int i = 0; i < familias.size(); i++) {
+                modelo.addElement(familias.get(i));
+            }
+            cb_padre.setModel(modelo);
+    }//GEN-LAST:event_Familia1ActionPerformed
+
+    private void persona1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_persona1ActionPerformed
+        // TODO add your handling code here:
+        DefaultComboBoxModel modelo = new DefaultComboBoxModel();
+            for (int i = 0; i < persona.size(); i++) {
+                modelo.addElement(persona.get(i));
+            }
+            cb_padre.setModel(modelo);
+    }//GEN-LAST:event_persona1ActionPerformed
+
+    private void Familia2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Familia2ActionPerformed
+        // TODO add your handling code here:
+        DefaultComboBoxModel modelo = new DefaultComboBoxModel();
+            for (int i = 0; i < familias.size(); i++) {
+                modelo.addElement(familias.get(i));
+            }
+            cb_hijo.setModel(modelo);
+    }//GEN-LAST:event_Familia2ActionPerformed
+
+    private void persona2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_persona2ActionPerformed
+        // TODO add your handling code here:
+        DefaultComboBoxModel modelo = new DefaultComboBoxModel();
+            for (int i = 0; i < persona.size(); i++) {
+                modelo.addElement(persona.get(i));
+            }
+            cb_hijo.setModel(modelo);
+    }//GEN-LAST:event_persona2ActionPerformed
+
+    private void jButton8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton8MouseClicked
+        // TODO add your handling code here:4
+        hijos.add( cb_hijo.getItemAt(cb_hijo.getSelectedIndex()));
+        tempFamiliar.add(cb_hijo.getItemAt(cb_hijo.getSelectedIndex()));
+        JOptionPane.showMessageDialog(this, "Se ha agregado exitosamente");
+    }//GEN-LAST:event_jButton8MouseClicked
+
+    private void jButton13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton13MouseClicked
+        // TODO add your handling code here:
+         String nombre,id,nacionalidad,lugar,color = null;
+        int edad,entrada,salida;
+        float sueldo;
+        Object padre=cb_padre.getItemAt(cb_padre.getSelectedIndex());
+        JTree model = tree1;
+        
+        nombre = tf_nombreFamilia.getText();
+        edad = Integer.parseInt(tf_edadFamilia.getText());
+        id=tf_idFamilia.getText();
+        nacionalidad=tf_nacionalidadFamilia.getText();
+        lugar=tf_lugarFamilia.getText();
+        if(bttn_colorFamilia.getBackground()== Color.BLACK){
+            color="negro";
+        }else if(bttn_colorFamilia.getBackground()== Color.WHITE){
+            color="blanco";
+        }
+
+        familias.add(new Familiar(tempFamiliar,padre,edad,id,nacionalidad,lugar,nombre,model,color,null));
+        tempFamiliar.clear();
+        JOptionPane.showMessageDialog(this, "Se agrego un familiar exitosamente!");
+
+        tf_nombreFamilia.setText("");
+        tf_edadFamilia.setText("");
+        tf_idFamilia.setText("");
+        tf_nacionalidadFamilia.setText("");
+        tf_lugarFamilia.setText("");
+        
+    }//GEN-LAST:event_jButton13MouseClicked
 
     /**
      * @param args the command line arguments
@@ -1845,8 +2023,11 @@ int ticket=0;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JRadioButton Familia1;
+    private javax.swing.JRadioButton Familia2;
     private javax.swing.JButton agregarEmpleado;
     private javax.swing.JButton agregarJefe;
+    private javax.swing.JTextField altura;
     private javax.swing.JButton bttn_color;
     private javax.swing.JButton bttn_colorClientes;
     private javax.swing.JButton bttn_colorFamilia;
@@ -1854,7 +2035,9 @@ int ticket=0;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JComboBox<String> cb_estado;
+    private javax.swing.JComboBox cb_hijo;
     private javax.swing.JComboBox<Empleado> cb_listaEmpleados;
+    private javax.swing.JComboBox cb_padre;
     private javax.swing.JComboBox<String> cb_seccion;
     private javax.swing.JComboBox<String> cb_seccionJefe;
     private javax.swing.JButton jButton1;
@@ -1870,8 +2053,6 @@ int ticket=0;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1893,7 +2074,6 @@ int ticket=0;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
-    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
@@ -1934,10 +2114,6 @@ int ticket=0;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JRadioButton jRadioButton4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -1951,36 +2127,36 @@ int ticket=0;
     private javax.swing.JDialog jd_familiar;
     private javax.swing.JDialog jd_gato;
     private javax.swing.JDialog jd_jefe;
+    private javax.swing.JRadioButton persona1;
+    private javax.swing.JRadioButton persona2;
+    private javax.swing.JTextField peso;
+    private javax.swing.JTextField precioBaleada;
+    private javax.swing.JTextField precioGato;
     private javax.swing.JProgressBar progress;
     private javax.swing.JSpinner sp_entrada;
     private javax.swing.JSpinner sp_salida;
     private javax.swing.JTextField tf_dineroClientes;
     private javax.swing.JTextField tf_edad;
-    private javax.swing.JTextField tf_edad1;
     private javax.swing.JTextField tf_edadClientes;
+    private javax.swing.JTextField tf_edadFamilia;
     private javax.swing.JTextField tf_edadJefe;
-    private javax.swing.JTextField tf_ganancia;
     private javax.swing.JTextField tf_id;
-    private javax.swing.JTextField tf_id1;
     private javax.swing.JTextField tf_idClientes;
+    private javax.swing.JTextField tf_idFamilia;
     private javax.swing.JTextField tf_idJefe;
+    private javax.swing.JTextField tf_ingrediente;
     private javax.swing.JTextField tf_lugar;
-    private javax.swing.JTextField tf_lugar1;
     private javax.swing.JTextField tf_lugarClientes;
+    private javax.swing.JTextField tf_lugarFamilia;
     private javax.swing.JTextField tf_lugarJefe;
     private javax.swing.JTextField tf_nacionalidad;
-    private javax.swing.JTextField tf_nacionalidad1;
     private javax.swing.JTextField tf_nacionalidadClientes;
+    private javax.swing.JTextField tf_nacionalidadFamilia;
     private javax.swing.JTextField tf_nacionalidadJefe;
     private javax.swing.JTextField tf_nombre;
-    private javax.swing.JTextField tf_nombre2;
     private javax.swing.JTextField tf_nombreClientes;
+    private javax.swing.JTextField tf_nombreFamilia;
     private javax.swing.JTextField tf_nombreJefe;
-    private javax.swing.JTextField tf_nombreJefe1;
-    private javax.swing.JTextField tf_nombreJefe2;
-    private javax.swing.JTextField tf_nombreJefe3;
-    private javax.swing.JTextField tf_nombreJefe4;
-    private javax.swing.JTextField tf_nombreJefe5;
     private javax.swing.JTextField tf_numerodeClientes;
     private javax.swing.JTextField tf_sueldo;
     private javax.swing.JTree tree1;
@@ -1989,4 +2165,14 @@ ArrayList<Jefes> jefe= new ArrayList();
 ArrayList<Persona> persona=new ArrayList();
 ArrayList<Empleado> empleado = new ArrayList();
 ArrayList<Clientes> cliente=new ArrayList();
+ArrayList<Empleado> temporal=new ArrayList();
+ArrayList<Articulos> articulos = new ArrayList();
+ArrayList<Gatos> gatos= new ArrayList();
+ArrayList<String> ingreTemporal=new ArrayList();
+ArrayList<Baleadas> baleadas=new ArrayList();
+ArrayList<Familiar> familias=new ArrayList();
+ArrayList hijos=new ArrayList();
+ArrayList<Familiar> padre=new ArrayList();
+ArrayList tempFamiliar=new ArrayList();
+
 }
