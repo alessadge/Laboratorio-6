@@ -10,15 +10,25 @@ public class Ordenes {
     private Empleado empleado;
     private float total;
     private Date date;
+    private int cantidadArticulo;
 
     public Ordenes() {
     }
 
-    public Ordenes(Clientes cliente, Empleado empleado, float total, Date date) {
+    public Ordenes(Clientes cliente, Empleado empleado, float total, Date date, int cantidadArticulo) {
         this.cliente = cliente;
         this.empleado = empleado;
         this.total = total;
         this.date = date;
+        this.cantidadArticulo = cantidadArticulo;
+    }
+
+    public int getCantidadArticulo() {
+        return cantidadArticulo;
+    }
+
+    public void setCantidadArticulo(int cantidadArticulo) {
+        this.cantidadArticulo = cantidadArticulo;
     }
 
     public void setArticulos(ArrayList<Articulos> articulos) {
