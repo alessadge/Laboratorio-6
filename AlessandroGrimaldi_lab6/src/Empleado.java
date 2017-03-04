@@ -1,9 +1,11 @@
 
+import java.awt.Color;
 import java.util.ArrayList;
+import javax.swing.tree.DefaultTreeModel;
 
 
 public class Empleado extends Persona{
-    protected String lugar,estado;
+    protected String seccion,estado;
     protected int entrada;
     protected int salida;
     protected float sueldo;
@@ -12,20 +14,22 @@ public class Empleado extends Persona{
     public Empleado() {
     }
 
-    public Empleado(String lugar, String estado,int entrada,int  salida, int sueldo) {
-        this.lugar = lugar;
+    public Empleado(String seccion, String estado, int entrada, int salida, float sueldo, ArrayList<Ordenes> ordenes, int edad, String ID, String nacionalidad, String lugar, String nombre, DefaultTreeModel arbol, Color color, Familiar familiar) {
+        super(edad, ID, nacionalidad, lugar, nombre, arbol, color, familiar);
+        this.seccion = seccion;
         this.estado = estado;
         this.entrada = entrada;
         this.salida = salida;
         this.sueldo = sueldo;
+        this.ordenes = ordenes;
     }
 
-    public String getLugar() {
-        return lugar;
+    public String getSeccion() {
+        return seccion;
     }
 
-    public void setLugar(String lugar) {
-        this.lugar = lugar;
+    public void setSeccion(String seccion) {
+        this.seccion = seccion;
     }
 
     public String getEstado() {
