@@ -634,6 +634,11 @@ int ticket=0;
         jLabel31.setText("Lista empleados:");
 
         agregarEmpleado.setText("Agregar empleado");
+        agregarEmpleado.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                agregarEmpleadoMouseClicked(evt);
+            }
+        });
 
         progress.setMaximum(3);
 
@@ -1679,12 +1684,38 @@ int ticket=0;
     }//GEN-LAST:event_tf_nombreJefe4ActionPerformed
 
     private void agregarJefeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_agregarJefeMouseClicked
-        // TODO add your handling code here:
-       
+        // TODO add your handling code here
         if(progress.getValue()<3){
-            
-            
-            progress.setValue(jefe.size());
+            String nombre,id,nacionalidad,lugar,color = null,estado,seccion;
+        int edad,numeroClientes;
+        float sueldo;
+        ArrayList<Empleado> empleado;
+        JTree model = tree1;
+
+        sueldo=Float.parseFloat(tf_ganancia.getText());
+        nombre = tf_nombreJefe.getText();
+        edad = Integer.parseInt(tf_edadJefe.getText());
+        id=tf_idJefe.getText();
+        nacionalidad=tf_nacionalidadJefe.getText();
+        lugar=tf_lugarJefe.getText();
+        if(bttn_colorJefe.getBackground()== Color.BLACK){
+            color="negro";
+        }else if(bttn_colorJefe.getBackground()== Color.WHITE){
+            color="blanco";
+        }
+        seccion=cb_seccionJefe.getItemAt(cb_seccionJefe.getSelectedIndex());
+        numeroClientes=Integer.parseInt(tf_numerodeClientes.getText());
+                
+        persona.add(new Jefes(seccion, numeroClientes, sueldo, edad, id, nacionalidad, lugar, nombre, model, color, null));
+        jefe.add(new Jefes(seccion, numeroClientes, sueldo, edad, id, nacionalidad, lugar, nombre, model, color, null));
+        JOptionPane.showMessageDialog(this, "Se agrego un jefe exitosamente!");
+        tf_ganancia.setText("");
+        tf_nombreJefe.setText("");
+        tf_edadJefe.setText("");
+        tf_idJefe.setText("");
+        tf_nacionalidadJefe.setText("");
+        tf_lugarJefe.setText("");
+        progress.setValue(jefe.size());
         }else{
             JOptionPane.showMessageDialog(this, "No se aceptan mas de 1 jefe por departamento");
         }
@@ -1771,6 +1802,13 @@ int ticket=0;
         
     }//GEN-LAST:event_jButton7MouseClicked
 
+    private void agregarEmpleadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_agregarEmpleadoMouseClicked
+        // TODO add your handling code here:
+        Empleado empleado;
+        empleado=cb_listaEmpleados.getItemAt(cb_listaEmpleados.getSelectedIndex());
+        
+    }//GEN-LAST:event_agregarEmpleadoMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -1816,7 +1854,7 @@ int ticket=0;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JComboBox<String> cb_estado;
-    private javax.swing.JComboBox<String> cb_listaEmpleados;
+    private javax.swing.JComboBox<Empleado> cb_listaEmpleados;
     private javax.swing.JComboBox<String> cb_seccion;
     private javax.swing.JComboBox<String> cb_seccionJefe;
     private javax.swing.JButton jButton1;

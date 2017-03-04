@@ -15,10 +15,9 @@ public class Jefes extends Persona {
         super();
     }
 
-    public Jefes(String seccion, ArrayList<Empleado> empleados, int numero, float ganancia, int edad, String ID, String nacionalidad, String lugar, String nombre, JTree arbol, String color, Familiar familiar) {
+    public Jefes(String seccion,  int numero, float ganancia, int edad, String ID, String nacionalidad, String lugar, String nombre, JTree arbol, String color, Familiar familiar) {
         super(edad, ID, nacionalidad, lugar, nombre, arbol, color, familiar);
         this.seccion = seccion;
-        this.empleados = empleados;
         this.numero = numero;
         this.ganancia = ganancia;
     }

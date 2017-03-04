@@ -906,13 +906,16 @@
             </Property>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Empleado&gt;"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JButton" name="agregarEmpleado">
           <Properties>
             <Property name="text" type="java.lang.String" value="Agregar empleado"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="agregarEmpleadoMouseClicked"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JProgressBar" name="progress">
           <Properties>
