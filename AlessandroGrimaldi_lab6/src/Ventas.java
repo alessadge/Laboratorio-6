@@ -4,6 +4,7 @@ import java.util.Date;
 
 
 public class Ventas {
+    private ArrayList<Articulos> articulos;
     private Clientes cliente;
     private Empleado empleado;
     private float total;
@@ -17,6 +18,14 @@ public class Ventas {
         this.empleado = empleado;
         this.total = total;
         this.date = date;
+    }
+
+    public ArrayList<Articulos> getArticulos() {
+        return articulos;
+    }
+
+    public void setArticulos(ArrayList<Articulos> articulos) {
+        this.articulos = articulos;
     }
 
     public Clientes getCliente() {

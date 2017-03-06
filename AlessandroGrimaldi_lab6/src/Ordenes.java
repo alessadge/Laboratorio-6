@@ -11,6 +11,7 @@ public class Ordenes {
     private float total;
     private Date date;
     private int cantidadArticulo;
+    private String ID;
 
     public Ordenes() {
     }
@@ -21,6 +22,14 @@ public class Ordenes {
         this.total = total;
         this.date = date;
         this.cantidadArticulo = cantidadArticulo;
+    }
+
+    public String getID() {
+        return ID;
+    }
+
+    public void setID(String ID) {
+        this.ID = ID;
     }
 
     public int getCantidadArticulo() {
@@ -51,9 +60,29 @@ public class Ordenes {
         this.date = date;
     }
 
+    public Clientes getCliente() {
+        return cliente;
+    }
+
+    public Empleado getEmpleado() {
+        return empleado;
+    }
+
+    public ArrayList<Articulos> getArticulos() {
+        return articulos;
+    }
+
+    public float getTotal() {
+        return total;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
     @Override
     public String toString() {
-        return "Ordenes{" + "articulos=" + articulos + ", cliente=" + cliente + ", empleado=" + empleado + ", total=" + total + ", date=" + date + '}';
+        return total+"";
     }
     
 }

@@ -7,13 +7,13 @@ import javax.swing.tree.DefaultTreeModel;
 
 class Familiar extends Persona {
     private ArrayList hijos;
-    private Object padre;
+    private Familiar padre;
 
     public Familiar() {
         super();
     }
 
-    public Familiar(ArrayList hijos, Object padre, int edad, String ID, String nacionalidad, String lugar, String nombre, JTree arbol, String color, Familiar familiar) {
+    public Familiar(ArrayList hijos, Familiar padre, int edad, String ID, String nacionalidad, String lugar, String nombre, JTree arbol, String color, Familiar familiar) {
         super(edad, ID, nacionalidad, lugar, nombre, arbol, color, familiar);
         this.hijos = hijos;
         this.padre = padre;
@@ -27,17 +27,17 @@ class Familiar extends Persona {
         this.hijos = hijos;
     }
 
-    public Object getPadre() {
+    public Familiar getPadre() {
         return padre;
     }
 
-    public void setPadre(Object padre) {
+    public void setPadre(Familiar padre) {
         this.padre = padre;
     }
 
     @Override
     public String toString() {
-        return super.toString()+"Familiar{" + "hijos=" + hijos + ", padre=" + padre ;
+        return nombre;
     }
    
     

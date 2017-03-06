@@ -25,6 +25,10 @@ public class Empleado extends Persona{
         this.sueldo = sueldo;
     }
 
+    public ArrayList<Familiar> getFamiliares() {
+        return familiares;
+    }
+
     
     public String getSeccion() {
         return seccion;

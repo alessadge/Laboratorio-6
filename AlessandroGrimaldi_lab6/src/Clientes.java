@@ -8,13 +8,13 @@ import javax.swing.tree.DefaultTreeModel;
 public class Clientes extends Persona {
     private int ticket;
     private float dinero;
-    private ArrayList<String> ordenes;
+    private ArrayList<Ordenes> ordenes;
 
     public Clientes() {
         super();
     }
 
-    public Clientes(int ticket, float dinero, ArrayList<String> ordenes, int edad, String ID, String nacionalidad, String lugar, String nombre, JTree arbol, String color, Familiar familiar) {
+    public Clientes(int ticket, float dinero, ArrayList<Ordenes> ordenes, int edad, String ID, String nacionalidad, String lugar, String nombre, JTree arbol, String color, Familiar familiar) {
         super(edad, ID, nacionalidad, lugar, nombre, arbol, color, familiar);
         this.ticket = ticket;
         this.dinero = dinero;
@@ -37,11 +37,11 @@ public class Clientes extends Persona {
         this.dinero = dinero;
     }
 
-    public ArrayList<String> getOrdenes() {
+    public ArrayList<Ordenes> getOrdenes() {
         return ordenes;
     }
 
-    public void setOrdenes(ArrayList<String> ordenes) {
+    public void setOrdenes(ArrayList<Ordenes> ordenes) {
         this.ordenes = ordenes;
     }
 

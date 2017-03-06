@@ -2,6 +2,7 @@
 public class Gatos extends Articulos {
    private int peso;
    private int altura;
+   private String ID;
 
     public Gatos() {
     }
@@ -10,6 +11,14 @@ public class Gatos extends Articulos {
         super(precio);
         this.peso = peso;
         this.altura = altura;
+    }
+
+    public String getID() {
+        return ID;
+    }
+
+    public void setID(String ID) {
+        this.ID = ID;
     }
 
     
@@ -31,7 +40,7 @@ public class Gatos extends Articulos {
 
     @Override
     public String toString() {
-        return "Gatos{" + "peso=" + peso + ", altura=" + altura + '}';
+        return ""+precio;
     }
    
 }

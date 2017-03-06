@@ -1,13 +1,26 @@
 
 import java.awt.Color;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JColorChooser;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTree;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 
 /*
@@ -23,8 +36,13 @@ import javax.swing.tree.DefaultTreeModel;
 public class Principal extends javax.swing.JFrame {
 private int ticket=0;
 private int acum=0;
-private float gananciaGato;
-private float gananciaBaleada;
+private float gananciaGato=0;
+private float gananciaBaleada=0;
+private float total;
+private File carpeta_guardada;
+private boolean Guardo=false;
+String DirectAux="";
+Object aux;
     /**
      * Creates new form Principal
      */
@@ -277,7 +295,12 @@ private float gananciaBaleada;
         jScrollPane8 = new javax.swing.JScrollPane();
         jTree1 = new javax.swing.JTree();
         jButton27 = new javax.swing.JButton();
+        menu1 = new javax.swing.JPopupMenu();
+        menu1_abrir = new javax.swing.JMenuItem();
         jTabbedPane2 = new javax.swing.JTabbedPane();
+        jPanel23 = new javax.swing.JPanel();
+        jScrollPane9 = new javax.swing.JScrollPane();
+        ArbolStart = new javax.swing.JTree();
         jPanel8 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
@@ -315,14 +338,13 @@ private float gananciaBaleada;
         jRadioButton12 = new javax.swing.JRadioButton();
         jLabel64 = new javax.swing.JLabel();
         jPanel10 = new javax.swing.JPanel();
-        jTabbedPane3 = new javax.swing.JTabbedPane();
+        tab_ordenes = new javax.swing.JTabbedPane();
         jPanel14 = new javax.swing.JPanel();
         jLabel29 = new javax.swing.JLabel();
         jLabel46 = new javax.swing.JLabel();
         jLabel47 = new javax.swing.JLabel();
         jLabel48 = new javax.swing.JLabel();
         jLabel49 = new javax.swing.JLabel();
-        tf_totalBaleadas = new javax.swing.JTextField();
         cb_baleadasEmpleado = new javax.swing.JComboBox<>();
         sp_numArt = new javax.swing.JSpinner();
         bttn_ordenarBaleada = new javax.swing.JButton();
@@ -332,6 +354,7 @@ private float gananciaBaleada;
         jLabel60 = new javax.swing.JLabel();
         jLabel61 = new javax.swing.JLabel();
         cb_baleadasBaleadas = new javax.swing.JComboBox<>();
+        jButton28 = new javax.swing.JButton();
         jPanel15 = new javax.swing.JPanel();
         jLabel55 = new javax.swing.JLabel();
         jLabel56 = new javax.swing.JLabel();
@@ -340,7 +363,6 @@ private float gananciaBaleada;
         jLabel59 = new javax.swing.JLabel();
         cb_gatosEmpleados = new javax.swing.JComboBox<>();
         sp_numArt1 = new javax.swing.JSpinner();
-        tf_totalGatos = new javax.swing.JTextField();
         bttn_ordenarGato = new javax.swing.JButton();
         fecha_gato = new com.toedter.calendar.JDateChooser();
         cb_gatosCliente = new javax.swing.JComboBox<>();
@@ -348,6 +370,7 @@ private float gananciaBaleada;
         cb_gatosGatos = new javax.swing.JComboBox<>();
         progressGatos = new javax.swing.JProgressBar();
         jLabel63 = new javax.swing.JLabel();
+        jButton29 = new javax.swing.JButton();
         jPanel16 = new javax.swing.JPanel();
         jLabel50 = new javax.swing.JLabel();
         jLabel51 = new javax.swing.JLabel();
@@ -366,21 +389,24 @@ private float gananciaBaleada;
         jPanel17 = new javax.swing.JPanel();
         jTabbedPane5 = new javax.swing.JTabbedPane();
         jPanel19 = new javax.swing.JPanel();
-        tf_gananciasGatos = new javax.swing.JTextField();
         jLabel68 = new javax.swing.JLabel();
+        jButton30 = new javax.swing.JButton();
         jPanel20 = new javax.swing.JPanel();
         jLabel69 = new javax.swing.JLabel();
-        tf_gananciasBaleadas = new javax.swing.JTextField();
+        jButton31 = new javax.swing.JButton();
         jPanel18 = new javax.swing.JPanel();
         jTabbedPane6 = new javax.swing.JTabbedPane();
         jPanel21 = new javax.swing.JPanel();
         jLabel67 = new javax.swing.JLabel();
         jScrollPane11 = new javax.swing.JScrollPane();
         lista_ventasGatos = new javax.swing.JList<>();
+        jLabel76 = new javax.swing.JLabel();
+        jLabel116 = new javax.swing.JLabel();
         jPanel22 = new javax.swing.JPanel();
         jLabel66 = new javax.swing.JLabel();
         jScrollPane10 = new javax.swing.JScrollPane();
         lista_ventasBaleadas = new javax.swing.JList<>();
+        jLabel30 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -2367,6 +2393,8 @@ private float gananciaBaleada;
         jLabel115.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel115.setText("Ingrese un familiar:");
 
+        treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("root");
+        jTree1.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
         jScrollPane8.setViewportView(jTree1);
 
         jButton27.setBackground(new java.awt.Color(153, 153, 153));
@@ -2515,12 +2543,60 @@ private float gananciaBaleada;
                 .addGap(25, 25, 25))
         );
 
+        menu1.setToolTipText("menu1");
+
+        menu1_abrir.setText("Abrir...");
+        menu1_abrir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menu1_abrirMouseClicked(evt);
+            }
+        });
+        menu1_abrir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu1_abrirActionPerformed(evt);
+            }
+        });
+        menu1.add(menu1_abrir);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Laboratorio 6");
 
         jTabbedPane2.setBackground(new java.awt.Color(153, 153, 153));
         jTabbedPane2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jTabbedPane2.setFont(new java.awt.Font("Verdana", 1, 11)); // NOI18N
+        jTabbedPane2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTabbedPane2MouseClicked(evt);
+            }
+        });
+
+        treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Archivos");
+        ArbolStart.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        ArbolStart.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ArbolStartMouseClicked(evt);
+            }
+        });
+        jScrollPane9.setViewportView(ArbolStart);
+
+        javax.swing.GroupLayout jPanel23Layout = new javax.swing.GroupLayout(jPanel23);
+        jPanel23.setLayout(jPanel23Layout);
+        jPanel23Layout.setHorizontalGroup(
+            jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel23Layout.createSequentialGroup()
+                .addGap(74, 74, 74)
+                .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(294, Short.MAX_VALUE))
+        );
+        jPanel23Layout.setVerticalGroup(
+            jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel23Layout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 419, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(61, Short.MAX_VALUE))
+        );
+
+        jTabbedPane2.addTab("Pagina de inicio", jPanel23);
 
         jPanel8.setBackground(new java.awt.Color(153, 153, 153));
 
@@ -2593,7 +2669,7 @@ private float gananciaBaleada;
                 .addComponent(jLabel1)
                 .addGap(43, 43, 43)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(36, 36, 36)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -2672,7 +2748,7 @@ private float gananciaBaleada;
                 .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(51, 51, 51)
                 .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(92, Short.MAX_VALUE))
+                .addContainerGap(89, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -2727,9 +2803,9 @@ private float gananciaBaleada;
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addComponent(jLabel3)
-                .addGap(100, 100, 100)
+                .addGap(90, 90, 90)
                 .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 160, Short.MAX_VALUE))
+                .addGap(0, 167, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -2755,16 +2831,17 @@ private float gananciaBaleada;
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
+            .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1)
-                .addContainerGap())
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 686, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(17, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 103, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 407, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(96, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Agregar", jPanel8);
@@ -2856,7 +2933,7 @@ private float gananciaBaleada;
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
-                .addContainerGap(126, Short.MAX_VALUE)
+                .addContainerGap(127, Short.MAX_VALUE)
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jRadioButton2)
                     .addComponent(jRadioButton3)
@@ -2956,18 +3033,18 @@ private float gananciaBaleada;
             .addGroup(jPanel12Layout.createSequentialGroup()
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel12Layout.createSequentialGroup()
-                        .addGap(73, 73, 73)
-                        .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jRadioButton11)
-                            .addComponent(jRadioButton10)
-                            .addComponent(jRadioButton9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jRadioButton7)
-                                .addComponent(jRadioButton12))
-                            .addComponent(jRadioButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(jPanel12Layout.createSequentialGroup()
                         .addGap(46, 46, 46)
-                        .addComponent(jLabel64)))
+                        .addComponent(jLabel64))
+                    .addGroup(jPanel12Layout.createSequentialGroup()
+                        .addGap(73, 73, 73)
+                        .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jRadioButton11)
+                            .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jRadioButton10)
+                                .addComponent(jRadioButton9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jRadioButton12)
+                                .addComponent(jRadioButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jRadioButton7))))
                 .addContainerGap(489, Short.MAX_VALUE))
         );
         jPanel12Layout.setVerticalGroup(
@@ -2979,15 +3056,15 @@ private float gananciaBaleada;
                 .addComponent(jRadioButton8)
                 .addGap(29, 29, 29)
                 .addComponent(jRadioButton9)
-                .addGap(31, 31, 31)
+                .addGap(33, 33, 33)
                 .addComponent(jRadioButton10)
-                .addGap(18, 18, 18)
+                .addGap(26, 26, 26)
                 .addComponent(jRadioButton11)
-                .addGap(29, 29, 29)
+                .addGap(28, 28, 28)
                 .addComponent(jRadioButton7)
-                .addGap(48, 48, 48)
+                .addGap(32, 32, 32)
                 .addComponent(jRadioButton12)
-                .addContainerGap(118, Short.MAX_VALUE))
+                .addContainerGap(126, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
@@ -3011,10 +3088,10 @@ private float gananciaBaleada;
 
         jPanel10.setBackground(new java.awt.Color(153, 153, 153));
 
-        jTabbedPane3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jTabbedPane3.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
-                jTabbedPane3MouseDragged(evt);
+        tab_ordenes.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        tab_ordenes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tab_ordenesMouseClicked(evt);
             }
         });
 
@@ -3038,9 +3115,7 @@ private float gananciaBaleada;
         jLabel48.setText("Total:");
 
         jLabel49.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel49.setText("Fecha de la venta:");
-
-        tf_totalBaleadas.setEnabled(false);
+        jLabel49.setText("Hora de la venta:");
 
         bttn_ordenarBaleada.setBackground(new java.awt.Color(153, 153, 153));
         bttn_ordenarBaleada.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -3069,82 +3144,92 @@ private float gananciaBaleada;
         jLabel61.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel61.setText("Seleccion una Baleada:");
 
+        jButton28.setText("Ver total");
+        jButton28.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton28MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
         jPanel14Layout.setHorizontalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel14Layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel61)
-                    .addComponent(jLabel29))
-                .addGap(33, 33, 33)
-                .addComponent(cb_baleadasBaleadas, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(jPanel14Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel46)
-                    .addComponent(jLabel47)
-                    .addComponent(jLabel48))
-                .addGap(33, 33, 33)
-                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel14Layout.createSequentialGroup()
-                        .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(tf_totalBaleadas, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(sp_numArt, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cb_baleadasEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel14Layout.createSequentialGroup()
-                        .addComponent(cb_baleadasClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(45, 45, 45)
-                        .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel49)
-                            .addComponent(jLabel60))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(progressBaleada, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addComponent(jf_fecha, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE))
-                        .addGap(0, 41, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel14Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(bttn_ordenarBaleada, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(267, 267, 267))
+            .addGroup(jPanel14Layout.createSequentialGroup()
+                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel14Layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel61)
+                            .addComponent(jLabel29))
+                        .addGap(33, 33, 33)
+                        .addComponent(cb_baleadasBaleadas, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel14Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel46)
+                            .addComponent(jLabel47)
+                            .addComponent(jLabel48))
+                        .addGap(33, 33, 33)
+                        .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel14Layout.createSequentialGroup()
+                                .addComponent(cb_baleadasClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(45, 45, 45)
+                                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel49)
+                                    .addComponent(jLabel60))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(progressBaleada, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                    .addComponent(jf_fecha, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)))
+                            .addGroup(jPanel14Layout.createSequentialGroup()
+                                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jButton28, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(sp_numArt, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cb_baleadasEmpleado, javax.swing.GroupLayout.Alignment.LEADING, 0, 130, Short.MAX_VALUE))
+                                .addGap(312, 312, 312)))))
+                .addGap(0, 41, Short.MAX_VALUE))
         );
         jPanel14Layout.setVerticalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel14Layout.createSequentialGroup()
                 .addGap(26, 26, 26)
-                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(progressBaleada, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel60)
-                    .addComponent(jLabel61)
-                    .addComponent(cb_baleadasBaleadas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
-                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel49)
-                        .addComponent(cb_baleadasClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel29))
-                    .addComponent(jf_fecha, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(49, 49, 49)
-                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cb_baleadasEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel46))
+                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel14Layout.createSequentialGroup()
+                        .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(progressBaleada, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel60)
+                                .addComponent(jLabel61)
+                                .addComponent(cb_baleadasBaleadas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(28, 28, 28)
+                        .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel49)
+                                .addComponent(cb_baleadasClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel29))
+                            .addComponent(jf_fecha, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(49, 49, 49)
+                        .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cb_baleadasEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel46))
+                        .addGap(48, 48, 48)
+                        .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel47)
+                            .addComponent(sp_numArt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(36, 36, 36)
+                        .addComponent(jLabel48))
+                    .addComponent(jButton28))
                 .addGap(48, 48, 48)
-                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel47)
-                    .addComponent(sp_numArt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(34, 34, 34)
-                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel48)
-                    .addComponent(tf_totalBaleadas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(45, 45, 45)
                 .addComponent(bttn_ordenarBaleada, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(93, Short.MAX_VALUE))
+                .addContainerGap(94, Short.MAX_VALUE))
         );
 
-        jTabbedPane3.addTab("Venta de seccion baleadas", jPanel14);
+        tab_ordenes.addTab("Venta de seccion baleadas", jPanel14);
 
         jPanel15.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -3166,8 +3251,6 @@ private float gananciaBaleada;
 
         jLabel59.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel59.setText("Fecha de la venta:");
-
-        tf_totalGatos.setEnabled(false);
 
         bttn_ordenarGato.setBackground(new java.awt.Color(153, 153, 153));
         bttn_ordenarGato.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -3191,6 +3274,13 @@ private float gananciaBaleada;
         jLabel63.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel63.setText("Progreso de ordenes:");
 
+        jButton29.setText("Ver total");
+        jButton29.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton29MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
         jPanel15.setLayout(jPanel15Layout);
         jPanel15Layout.setHorizontalGroup(
@@ -3206,10 +3296,10 @@ private float gananciaBaleada;
                 .addGap(31, 31, 31)
                 .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(cb_gatosEmpleados, 0, 130, Short.MAX_VALUE)
-                    .addComponent(tf_totalGatos, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
                     .addComponent(sp_numArt1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cb_gatosCliente, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cb_gatosGatos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(cb_gatosGatos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton29, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(45, 45, 45)
                 .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel59)
@@ -3254,14 +3344,14 @@ private float gananciaBaleada;
                     .addComponent(jLabel56))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tf_totalGatos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel55))
-                .addGap(83, 83, 83)
+                    .addComponent(jLabel55)
+                    .addComponent(jButton29))
+                .addGap(81, 81, 81)
                 .addComponent(bttn_ordenarGato, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(119, 119, 119))
         );
 
-        jTabbedPane3.addTab("Venta de seccion gatos", jPanel15);
+        tab_ordenes.addTab("Venta de seccion gatos", jPanel15);
 
         jLabel50.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel50.setText("Total:");
@@ -3309,7 +3399,7 @@ private float gananciaBaleada;
                 .addComponent(jLabel54)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jDateChooser3, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(51, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel16Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton20, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -3347,25 +3437,32 @@ private float gananciaBaleada;
                     .addGroup(jPanel16Layout.createSequentialGroup()
                         .addComponent(jDateChooser3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(150, 150, 150)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 112, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 113, Short.MAX_VALUE)
                 .addComponent(jButton20, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(116, 116, 116))
             .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel16Layout.createSequentialGroup()
-                    .addContainerGap(311, Short.MAX_VALUE)
+                    .addContainerGap(312, Short.MAX_VALUE)
                     .addComponent(jButton21, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(118, 118, 118)))
         );
 
-        jTabbedPane3.addTab("Venta de seccion cocina", jPanel16);
+        tab_ordenes.addTab("Venta de seccion cocina", jPanel16);
 
         jPanel17.setBackground(new java.awt.Color(204, 204, 204));
         jPanel17.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        tf_gananciasGatos.setEnabled(false);
-
         jLabel68.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel68.setText("Ganancias Gatos:");
+
+        jButton30.setBackground(new java.awt.Color(153, 153, 153));
+        jButton30.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jButton30.setText("Ver ganancia");
+        jButton30.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton30MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
         jPanel19.setLayout(jPanel19Layout);
@@ -3374,18 +3471,18 @@ private float gananciaBaleada;
             .addGroup(jPanel19Layout.createSequentialGroup()
                 .addGap(156, 156, 156)
                 .addComponent(jLabel68)
-                .addGap(59, 59, 59)
-                .addComponent(tf_gananciasGatos, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(206, Short.MAX_VALUE))
+                .addGap(35, 35, 35)
+                .addComponent(jButton30, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(252, Short.MAX_VALUE))
         );
         jPanel19Layout.setVerticalGroup(
             jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel19Layout.createSequentialGroup()
-                .addGap(75, 75, 75)
-                .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tf_gananciasGatos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(69, 69, 69)
+                .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton30)
                     .addComponent(jLabel68))
-                .addContainerGap(267, Short.MAX_VALUE))
+                .addContainerGap(270, Short.MAX_VALUE))
         );
 
         jTabbedPane5.addTab("Gatos", jPanel19);
@@ -3393,7 +3490,14 @@ private float gananciaBaleada;
         jLabel69.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel69.setText("Ganancias Gatos:");
 
-        tf_gananciasBaleadas.setEnabled(false);
+        jButton31.setBackground(new java.awt.Color(153, 153, 153));
+        jButton31.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jButton31.setText("Ver ganancia");
+        jButton31.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton31MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel20Layout = new javax.swing.GroupLayout(jPanel20);
         jPanel20.setLayout(jPanel20Layout);
@@ -3402,18 +3506,18 @@ private float gananciaBaleada;
             .addGroup(jPanel20Layout.createSequentialGroup()
                 .addGap(151, 151, 151)
                 .addComponent(jLabel69)
-                .addGap(18, 18, 18)
-                .addComponent(tf_gananciasBaleadas, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(252, Short.MAX_VALUE))
+                .addGap(29, 29, 29)
+                .addComponent(jButton31, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(263, Short.MAX_VALUE))
         );
         jPanel20Layout.setVerticalGroup(
             jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel20Layout.createSequentialGroup()
-                .addGap(90, 90, 90)
+                .addGap(88, 88, 88)
                 .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel69)
-                    .addComponent(tf_gananciasBaleadas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(252, Short.MAX_VALUE))
+                    .addComponent(jButton31))
+                .addContainerGap(251, Short.MAX_VALUE))
         );
 
         jTabbedPane5.addTab("Baleadas", jPanel20);
@@ -3439,6 +3543,10 @@ private float gananciaBaleada;
 
         jScrollPane11.setViewportView(lista_ventasGatos);
 
+        jLabel76.setText("(Despues de tres ordenes)");
+
+        jLabel116.setText("(Despues de tres ordenes)");
+
         javax.swing.GroupLayout jPanel21Layout = new javax.swing.GroupLayout(jPanel21);
         jPanel21.setLayout(jPanel21Layout);
         jPanel21Layout.setHorizontalGroup(
@@ -3447,17 +3555,32 @@ private float gananciaBaleada;
                 .addGap(134, 134, 134)
                 .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel67))
+                    .addGroup(jPanel21Layout.createSequentialGroup()
+                        .addComponent(jLabel67)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel116)))
                 .addContainerGap(103, Short.MAX_VALUE))
+            .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel21Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jLabel76)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         jPanel21Layout.setVerticalGroup(
             jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel21Layout.createSequentialGroup()
                 .addGap(40, 40, 40)
-                .addComponent(jLabel67)
+                .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel67)
+                    .addComponent(jLabel116))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(33, Short.MAX_VALUE))
+            .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel21Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jLabel76)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         jTabbedPane6.addTab("Gatos", jPanel21);
@@ -3467,6 +3590,8 @@ private float gananciaBaleada;
 
         jScrollPane10.setViewportView(lista_ventasBaleadas);
 
+        jLabel30.setText("(Despues de tres ordenes)");
+
         javax.swing.GroupLayout jPanel22Layout = new javax.swing.GroupLayout(jPanel22);
         jPanel22.setLayout(jPanel22Layout);
         jPanel22Layout.setHorizontalGroup(
@@ -3475,14 +3600,19 @@ private float gananciaBaleada;
                 .addGap(144, 144, 144)
                 .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel66))
+                    .addGroup(jPanel22Layout.createSequentialGroup()
+                        .addComponent(jLabel66)
+                        .addGap(26, 26, 26)
+                        .addComponent(jLabel30)))
                 .addContainerGap(93, Short.MAX_VALUE))
         );
         jPanel22Layout.setVerticalGroup(
             jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel22Layout.createSequentialGroup()
                 .addGap(58, 58, 58)
-                .addComponent(jLabel66)
+                .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel66)
+                    .addComponent(jLabel30))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(22, Short.MAX_VALUE))
@@ -3513,10 +3643,10 @@ private float gananciaBaleada;
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel13Layout.createSequentialGroup()
                 .addComponent(jTabbedPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 424, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 38, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jTabbedPane3.addTab("Reportes de Ganancias/Ventas", jPanel13);
+        tab_ordenes.addTab("Reportes de Ganancias/Ventas", jPanel13);
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
@@ -3524,14 +3654,14 @@ private float gananciaBaleada;
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane3)
+                .addComponent(tab_ordenes)
                 .addContainerGap())
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane3)
+                .addComponent(tab_ordenes)
                 .addContainerGap())
         );
 
@@ -3541,9 +3671,19 @@ private float gananciaBaleada;
 
         jMenu1.setText("File");
         jMenu1.setFont(new java.awt.Font("Rockwell", 1, 13)); // NOI18N
+        jMenu1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu1ActionPerformed(evt);
+            }
+        });
 
         jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_1, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem1.setText("Abrir");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem1);
 
         jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_2, java.awt.event.InputEvent.CTRL_MASK));
@@ -3557,6 +3697,11 @@ private float gananciaBaleada;
 
         jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_3, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem3.setText("Guardar como...");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem3);
 
         jMenuItem4.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_4, java.awt.event.InputEvent.CTRL_MASK));
@@ -3587,7 +3732,7 @@ private float gananciaBaleada;
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 724, Short.MAX_VALUE)
+                .addComponent(jTabbedPane2)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -3602,10 +3747,36 @@ private float gananciaBaleada;
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         // TODO add your handling code here:
+        JFileChooser fileChooser = new JFileChooser();
+        int seleccion = fileChooser.showSaveDialog(this);
+        if (!Guardo) {
+            if (seleccion == JFileChooser.APPROVE_OPTION) {
+                File dir = fileChooser.getSelectedFile();
+                boolean fueCreado = dir.mkdir();
+                DefaultMutableTreeNode Raiz = new DefaultMutableTreeNode();
+                DefaultTreeModel modeloArbol = (DefaultTreeModel) ArbolStart.getModel();
+                DefaultMutableTreeNode directory = new DefaultMutableTreeNode(dir);
+                Raiz.add(directory);
+                if (fueCreado) {
+                    carpeta_guardada = dir;
+                    Guardo = true;
+                    guardarTodo();
+                    JOptionPane.showMessageDialog(this, "Directorio creado exitosamente");
+                } else {
+                    JOptionPane.showMessageDialog(this, "El directorio no fue creado");
+                }
+            } else {
+                guardarTodo();
+            }
+
+        }
+
+
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         // TODO add your handling code here:
+        System.exit(0);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jButton6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseClicked
@@ -3753,28 +3924,32 @@ private float gananciaBaleada;
         id=tf_idClientes.getText();
         nacionalidad=tf_nacionalidadClientes.getText();
         lugar=tf_lugarClientes.getText();
-        if(bttn_colorClientes.getBackground()== Color.BLACK){
+        if(bttn_color.getForeground()== Color.BLACK||bttn_color.getForeground()== Color.black){
             color="negro";
-        }else if(bttn_colorClientes.getBackground()== Color.WHITE){
+        }else if(bttn_color.getForeground()== Color.WHITE||bttn_color.getForeground()== Color.white){
             color="blanco";
         }
-        if(!nombre.equalsIgnoreCase("carlos")||!nombre.equalsIgnoreCase("pedro")||!nombre.equalsIgnoreCase("juan")||!nombre.equalsIgnoreCase("roberto")||!nombre.equalsIgnoreCase("eduardo")||"estadounidense".equalsIgnoreCase(nacionalidad)||
-                "estadounidense".equalsIgnoreCase(lugar)||"blanco".equalsIgnoreCase(color)){
+            
+         
+        if(nacionalidad.equalsIgnoreCase("estadounidense")&&lugar.equalsIgnoreCase("estadounidense")&&color.equalsIgnoreCase("blanco")){
             
             JOptionPane.showMessageDialog(this,"Solo aceptamos latinos pobres!!");
-            jefes.add(new Clientes(ticket,sueldo,null,edad,id,nacionalidad,lugar,nombre,model,color,null));
-        }else if(!nacionalidad.equalsIgnoreCase("estadounidense")||!lugar.equalsIgnoreCase("estadounidense")||!color.equalsIgnoreCase("blanco")
-                ){
-        persona.add(new Clientes(ticket,sueldo,null,edad,id,nacionalidad,lugar,nombre,model,color,null));
-        cliente.add(new Clientes(ticket,sueldo,null,edad,id,nacionalidad,lugar,nombre,model,color,null));
-        negros.add(new Clientes(ticket,sueldo,null,edad,id,nacionalidad,lugar,nombre,model,color,null));
-        JOptionPane.showMessageDialog(this, "Se agrego un cliente exitosamente!");
-        tf_dineroClientes.setText("");
-        tf_nombreClientes.setText("");
-        tf_edadClientes.setText("");
-        tf_idClientes.setText("");
-        tf_nacionalidadClientes.setText("");
-        tf_lugarClientes.setText("");
+            
+        }else if(nombre.equalsIgnoreCase("carlos")||nombre.equalsIgnoreCase("pedro")||nombre.equalsIgnoreCase("juan")||nombre.equalsIgnoreCase("roberto")||nombre.equalsIgnoreCase("eduardo")&&"estadounidense".equalsIgnoreCase(nacionalidad)&&
+                "estadounidense".equalsIgnoreCase(lugar)&&"blanco".equalsIgnoreCase(color)){
+            
+            persona.add(new Clientes(ticket,sueldo,null,edad,id,nacionalidad,lugar,nombre,model,color,null));
+            cliente.add(new Clientes(ticket,sueldo,null,edad,id,nacionalidad,lugar,nombre,model,color,null));
+            negros.add(new Clientes(ticket,sueldo,null,edad,id,nacionalidad,lugar,nombre,model,color,null));
+            
+            JOptionPane.showMessageDialog(this, "Se agrego un cliente exitosamente!");
+            tf_dineroClientes.setText("");
+            tf_nombreClientes.setText("");
+            tf_edadClientes.setText("");
+            tf_idClientes.setText("");
+            tf_nacionalidadClientes.setText("");
+            tf_lugarClientes.setText("");
+            
         }
     }//GEN-LAST:event_jButton9MouseClicked
 
@@ -3825,6 +4000,13 @@ private float gananciaBaleada;
 
     private void agregarJefeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_agregarJefeMouseClicked
         // TODO add your handling code here
+        boolean entrar=true;
+        for (Jefes t : jefe) {
+            if(cb_seccionJefe.getItemAt(cb_seccionJefe.getSelectedIndex()).equals(t.getSeccion()))
+                JOptionPane.showMessageDialog(this,"Ya hay un jefe en "+t.getSeccion());
+                entrar=false;
+                }
+        while(entrar==true){
         if(progress.getValue()<3){
         String nombre,id,nacionalidad,lugar,color = null,estado,seccion;
         int edad,numeroClientes;
@@ -3837,20 +4019,20 @@ private float gananciaBaleada;
         id=tf_idJefe.getText();
         nacionalidad=tf_nacionalidadJefe.getText();
         lugar=tf_lugarJefe.getText();
-        if(bttn_colorJefe.getBackground()== Color.BLACK){
+        if(bttn_colorJefe.getForeground()== Color.BLACK||bttn_colorJefe.getForeground()== Color.black){
             color="negro";
-        }else if(bttn_colorJefe.getBackground()== Color.WHITE){
+        }else if(bttn_colorJefe.getForeground()== Color.WHITE||bttn_colorJefe.getForeground()== Color.white){
             color="blanco";
         }
         seccion=cb_seccionJefe.getItemAt(cb_seccionJefe.getSelectedIndex());
-        if(nombre.equalsIgnoreCase("carlos")||nombre.equalsIgnoreCase("pedro")||nombre.equalsIgnoreCase("juan")||nombre.equalsIgnoreCase("roberto")||nombre.equalsIgnoreCase("eduardo")||!"estadounidense".equalsIgnoreCase(nacionalidad)||
-                !"estadounidense".equalsIgnoreCase(lugar)||!"blanco".equalsIgnoreCase(color)){
+        if(nombre.equalsIgnoreCase("carlos")||nombre.equalsIgnoreCase("pedro")||nombre.equalsIgnoreCase("juan")||nombre.equalsIgnoreCase("roberto")||nombre.equalsIgnoreCase("eduardo")&&!"estadounidense".equalsIgnoreCase(nacionalidad)&&
+                !"estadounidense".equalsIgnoreCase(lugar)&&"negro".equalsIgnoreCase(color)){
             
             JOptionPane.showMessageDialog(this,"No aceptamos latinos");
             negros.add(new Jefes(seccion,temporal, 0,  edad, id, nacionalidad, lugar, nombre, model, color, null));
-        }else if(nacionalidad.equalsIgnoreCase("estadounidense")||lugar.equalsIgnoreCase("estadounidense")||color.equalsIgnoreCase("blanco")
+        }else if("estadounidense".equalsIgnoreCase(nacionalidad)&&"estadounidense".equalsIgnoreCase(lugar)&&color.equals("blanco")
                 ){
-            jefes.add(new Jefes(seccion,temporal, 0,  edad, id, nacionalidad, lugar, nombre, model, color, null));
+            
             persona.add(new Jefes(seccion,temporal, 0,  edad, id, nacionalidad, lugar, nombre, model, color, null));
             jefe.add(new Jefes(seccion,temporal, 0,  edad, id, nacionalidad, lugar, nombre, model, color, null));
             temporal.clear();
@@ -3862,13 +4044,15 @@ private float gananciaBaleada;
             tf_lugarJefe.setText("");
             progress.setValue(jefe.size());
             
+        }else{
+            JOptionPane.showMessageDialog(this, "No se agrego, el jefe tiene que ser gringo.");
         }
         
         
         }else{
             JOptionPane.showMessageDialog(this, "No se aceptan mas de 1 jefe por departamento");
         }
-        
+        }
     }//GEN-LAST:event_agregarJefeMouseClicked
 
     private void cb_seccionJefeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cb_seccionJefeItemStateChanged
@@ -3926,38 +4110,43 @@ private float gananciaBaleada;
         id=tf_id.getText();
         nacionalidad=tf_nacionalidad.getText();
         lugar=tf_lugar.getText();
-        if(bttn_color.getBackground()== Color.BLACK){
+        if(bttn_color.getForeground()== Color.BLACK||bttn_color.getForeground()== Color.black){
             color="negro";
-        }else if(bttn_color.getBackground()== Color.WHITE){
+        }else if(bttn_color.getForeground()== Color.WHITE||bttn_color.getForeground()== Color.white){
             color="blanco";
         }
+        //(nacionalidad.equalsIgnoreCase("estadounidense")&&lugar.equalsIgnoreCase("estadounidense")&&color.equalsIgnoreCase("blanco")
+        //!nombre.equalsIgnoreCase("carlos")||!nombre.equalsIgnoreCase("pedro")||!nombre.equalsIgnoreCase("juan")||!nombre.equalsIgnoreCase("roberto")||!nombre.equalsIgnoreCase("eduardo")||"estadounidense".equalsIgnoreCase(nacionalidad)||
+        //        "estadounidense".equalsIgnoreCase(lugar)||"blanco".equalsIgnoreCase(color)   
         estado=cb_estado.getItemAt(cb_estado.getSelectedIndex());
         seccion=cb_seccion.getItemAt(cb_seccion.getSelectedIndex());
         entrada=Integer.parseInt(sp_entrada.getValue().toString());
         salida=Integer.parseInt(sp_salida.getValue().toString());
-        if(!nombre.equalsIgnoreCase("carlos")||!nombre.equalsIgnoreCase("pedro")||!nombre.equalsIgnoreCase("juan")||!nombre.equalsIgnoreCase("roberto")||!nombre.equalsIgnoreCase("eduardo")||"estadounidense".equalsIgnoreCase(nacionalidad)||
-                "estadounidense".equalsIgnoreCase(lugar)||"blanco".equalsIgnoreCase(color)){
+        if((nacionalidad.equalsIgnoreCase("estadounidense")&&lugar.equalsIgnoreCase("estadounidense")&&color.equalsIgnoreCase("blanco"))){
             
             JOptionPane.showMessageDialog(this,"Solo aceptamos latinos pobres!!");
-            jefes.add(new Empleado(seccion, estado, entrada, salida, sueldo, edad, id, nacionalidad, lugar, nombre, model, color, null));
-        }else if(!nacionalidad.equalsIgnoreCase("estadounidense")||!lugar.equalsIgnoreCase("estadounidense")||!color.equalsIgnoreCase("blanco")
-                ){
-        persona.add(new Empleado(seccion, estado, entrada, salida, sueldo, edad, id, nacionalidad, lugar, nombre, model, color, null));
-        empleado.add(new Empleado(seccion, estado, entrada, salida, sueldo, edad, id, nacionalidad, lugar, nombre, model, color, null));
-        negros.add(new Empleado(seccion, estado, entrada, salida, sueldo, edad, id, nacionalidad, lugar, nombre, model, color, null));
-        JOptionPane.showMessageDialog(this, "Se agrego un empleado exitosamente!");
-        tf_sueldo.setText("");
-        tf_nombre.setText("");
-        tf_edad.setText("");
-        tf_id.setText("");
-        tf_nacionalidad.setText("");
-        tf_lugar.setText("");
-        sp_entrada.setValue(0);
-        sp_salida.setValue(0);
+            
+        }else if(nombre.equalsIgnoreCase("carlos")||nombre.equalsIgnoreCase("pedro")||nombre.equalsIgnoreCase("juan")||nombre.equalsIgnoreCase("roberto")||nombre.equalsIgnoreCase("eduardo")&&!"estadounidense".equalsIgnoreCase(nacionalidad)&&
+                !"estadounidense".equalsIgnoreCase(lugar)&&!"blanco".equalsIgnoreCase(color)){
+            
+                 persona.add(new Empleado(seccion, estado, entrada, salida, sueldo, edad, id, nacionalidad, lugar, nombre, model, color, null));
+                 empleado.add(new Empleado(seccion, estado, entrada, salida, sueldo, edad, id, nacionalidad, lugar, nombre, model, color, null));
+                 negros.add(new Empleado(seccion, estado, entrada, salida, sueldo, edad, id, nacionalidad, lugar, nombre, model, color, null));
+                 JOptionPane.showMessageDialog(this, "Se agrego un empleado exitosamente!");
+                 tf_sueldo.setText("");
+                 tf_nombre.setText("");
+                 tf_edad.setText("");
+                 tf_id.setText("");
+                 tf_nacionalidad.setText("");
+                 tf_lugar.setText("");
+                 sp_entrada.setValue(0);
+                 sp_salida.setValue(0);
         
         
         
-        } 
+        }else{
+            JOptionPane.showMessageDialog(this, "Ingrese un nombre de negro");
+        }
     }//GEN-LAST:event_jButton7MouseClicked
 
     private void agregarEmpleadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_agregarEmpleadoMouseClicked
@@ -4072,7 +4261,7 @@ private float gananciaBaleada;
          String nombre,id,nacionalidad,lugar,color = null;
         int edad,entrada,salida;
         float sueldo;
-        Object padre=cb_padre.getItemAt(cb_padre.getSelectedIndex());
+        Familiar padre=(Familiar) cb_padre.getItemAt(cb_padre.getSelectedIndex());
         JTree model = tree1;
         
         nombre = tf_nombreFamilia.getText();
@@ -4102,7 +4291,7 @@ private float gananciaBaleada;
         // TODO add your handling code here:
         Tabla.setModel(new javax.swing.table.DefaultTableModel(new Object[][]{},new String[]{"Precio"}));
         DefaultTableModel modelo=(DefaultTableModel) Tabla.getModel();
-        for (int i = 0; i < empleado.size();i++) {
+        for (int i = 0; i < baleadas.size();i++) {
             Object[] row = {
                 baleadas.get(i).getPrecio()
                 
@@ -4261,39 +4450,35 @@ private float gananciaBaleada;
         int numArt;
         float total=0;
         double total1;
-        Date fecha = null;
+        Date fecha = jf_fecha.getDate();
         float billete;
-        int fechaTemp;
+        int fechaTemp=fecha.getHours();
+        
         empleado = cb_baleadasEmpleado.getItemAt(cb_baleadasEmpleado.getSelectedIndex());
         cliente = cb_baleadasClientes.getItemAt(cb_baleadasClientes.getSelectedIndex());
         baleada = cb_baleadasBaleadas.getItemAt(cb_baleadasBaleadas.getSelectedIndex());
-        
-        fecha = jf_fecha.getDate();
         numArt = Integer.parseInt(sp_numArt.getValue().toString());
-        fechaTemp=fecha.getHours();
-        if(cliente.color.equalsIgnoreCase("blanco")){
-            total1= (numArt*baleada.getPrecio())-((numArt*baleada.getPrecio())*0.75);
-            total = (float)total1;
-        }else{
-            total = numArt*baleada.getPrecio();
-        }
+        
+        total = numArt*baleada.getPrecio();
         billete=cliente.getDinero();
         
         if(empleado.entrada<fechaTemp&&empleado.salida>fechaTemp){
             
         if (billete>=total&&progressBaleada.getValue()<=2){           
              acum++;
-             tf_totalBaleadas.setText(""+total);
+             this.total = total;
+             cliente.setDinero(billete-total);
+             gananciaBaleada=gananciaBaleada+total;
              ordenes.add(new Ordenes(cliente, empleado, total, fecha, numArt));
             JOptionPane.showMessageDialog(this, "La compra se ha efectuado exitosamente");
         }else if(billete>=total&&progressBaleada.getValue()==3){
                 DefaultListModel modelo = (DefaultListModel) lista_ventasBaleadas.getModel();
                 modelo.addElement(new Ventas(cliente, empleado, total, fecha)) ;
                 lista_ventasBaleadas.setModel(modelo);
+                this.total=total;
+                cliente.setDinero(billete-total);
                 ventas.add(new Ventas(cliente, empleado, total, fecha));
-                tf_totalBaleadas.setText(""+total);
                 gananciaBaleada=gananciaBaleada+total;
-                tf_gananciasBaleadas.setText(""+gananciaBaleada);
                 JOptionPane.showMessageDialog(this, "La venta se ha efectuado exitosamente");
                 acum=0;
             }else{
@@ -4305,40 +4490,9 @@ private float gananciaBaleada;
         }
     }//GEN-LAST:event_bttn_ordenarBaleadaMouseClicked
 
-    private void jTabbedPane3MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane3MouseDragged
-        // TODO add your handling code here:
-        DefaultComboBoxModel modelo = new DefaultComboBoxModel();
-            for (int i = 0; i < cliente.size(); i++) {
-                modelo.addElement(cliente.get(i));
-            }
-            cb_baleadasClientes.setModel(modelo);
-            modelo = new DefaultComboBoxModel();
-            for (int i = 0; i < empleado.size(); i++) {
-                modelo.addElement(empleado.get(i));
-            }
-            cb_baleadasEmpleado.setModel(modelo);
-            
-        
-    }//GEN-LAST:event_jTabbedPane3MouseDragged
-
     private void jPanel14MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel14MouseEntered
         // TODO add your handling code here:
-        DefaultComboBoxModel modelo = new DefaultComboBoxModel();
-            for (int i = 0; i < cliente.size(); i++) {
-                modelo.addElement(cliente.get(i));
-            }
-            cb_baleadasClientes.setModel(modelo);
-            modelo = new DefaultComboBoxModel();
-            for (int i = 0; i < empleado.size(); i++) {
-                modelo.addElement(empleado.get(i));
-            }
-            cb_baleadasEmpleado.setModel(modelo);
-             modelo = new DefaultComboBoxModel();
-            for (int i = 0; i < baleadas.size(); i++) {
-                modelo.addElement(baleadas.get(i));
-            }
-            cb_baleadasBaleadas.setModel(modelo);
-            
+        
         
     }//GEN-LAST:event_jPanel14MouseEntered
 
@@ -4353,21 +4507,7 @@ private float gananciaBaleada;
 
     private void jPanel15MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel15MouseEntered
         // TODO add your handling code here:
-        DefaultComboBoxModel modelo = new DefaultComboBoxModel();
-            for (int i = 0; i < cliente.size(); i++) {
-                modelo.addElement(cliente.get(i));
-            }
-            cb_gatosCliente.setModel(modelo);
-            modelo = new DefaultComboBoxModel();
-            for (int i = 0; i < empleado.size(); i++) {
-                modelo.addElement(empleado.get(i));
-            }
-            cb_gatosEmpleados.setModel(modelo);
-            modelo = new DefaultComboBoxModel();
-            for (int i = 0; i < gatos.size(); i++) {
-                modelo.addElement(gatos.get(i));
-            }
-            cb_gatosGatos.setModel(modelo);
+        
             
         
     }//GEN-LAST:event_jPanel15MouseEntered
@@ -4385,24 +4525,20 @@ private float gananciaBaleada;
         empleado = cb_gatosEmpleados.getItemAt(cb_baleadasEmpleado.getSelectedIndex());
         cliente = cb_gatosCliente.getItemAt(cb_baleadasClientes.getSelectedIndex());
         gato = cb_gatosGatos.getItemAt(cb_gatosGatos.getSelectedIndex());
-        fecha = fecha_gato.getDate();
         numArt = Integer.parseInt(sp_numArt1.getValue().toString());
-        int fechatemp=fecha.getHours();
-        if(cliente.color.equalsIgnoreCase("blanco")){
-            total1= (numArt*gato.getPrecio())-((numArt*gato.getPrecio())*0.75);
-            total = (float)total1;
-        }else{
+        int fechaTemp;
+        fechaTemp=fecha_gato.getDate().getHours();
+        JOptionPane.showMessageDialog(this, fechaTemp);
             total = numArt*gato.getPrecio();
-        }
   
         billete=cliente.getDinero();
         
-        if(empleado.entrada<fechatemp&&empleado.salida>fechatemp){
-            
-        
+        if(empleado.entrada<fechaTemp&&empleado.salida>fechaTemp){
         if (billete>=total&&progressGatos.getValue()<=2){           
              acum++;
-             tf_totalGatos.setText(""+total);
+             this.total=total;
+             gananciaGato=gananciaGato+total;
+             cliente.setDinero(billete-total);
              ordenes.add(new Ordenes(cliente, empleado, total, fecha, numArt));
             JOptionPane.showMessageDialog(this, "La compra se ha efectuado exitosamente");
         }else if(billete>=total&&progressGatos.getValue()==3){
@@ -4410,9 +4546,9 @@ private float gananciaBaleada;
                 modelo.addElement(new Ventas(cliente, empleado, total, fecha)) ;
                 lista_ventasGatos.setModel(modelo);
                 gananciaGato=gananciaGato+total;
-                tf_gananciasGatos.setText(""+gananciaGato);
+                cliente.setDinero(billete-total);
+                this.total=total;
                 ventas.add(new Ventas(cliente, empleado, total, fecha));
-                tf_totalGatos.setText(""+total);
                 JOptionPane.showMessageDialog(this, "La venta se ha efectuado exitosamente");
                 acum=0;
             }else{
@@ -4471,18 +4607,19 @@ private float gananciaBaleada;
         id=tf_idJefe1.getText();
         nacionalidad=tf_nacionalidadJefe1.getText();
         lugar=tf_lugarJefe1.getText();
-        if(bttn_colorJefe1.getBackground()== Color.BLACK){
+        if(bttn_colorJefe1.getForeground()== Color.BLACK||bttn_colorJefe1.getForeground()== Color.black){
             color="negro";
-        }else if(bttn_colorJefe1.getBackground()== Color.WHITE){
+        }else if(bttn_colorJefe1.getForeground()== Color.WHITE||bttn_colorJefe1.getForeground()== Color.white){
             color="blanco";
         }
         seccion=cb_seccionJefe1.getItemAt(cb_seccionJefe1.getSelectedIndex());
-        if(nombre.equalsIgnoreCase("carlos")||nombre.equalsIgnoreCase("pedro")||nombre.equalsIgnoreCase("juan")||nombre.equalsIgnoreCase("roberto")||nombre.equalsIgnoreCase("eduardo")||!"estadounidense".equalsIgnoreCase(nacionalidad)||
-                !"estadounidense".equalsIgnoreCase(lugar)||!"blanco".equalsIgnoreCase(color)){
+         if(nombre.equalsIgnoreCase("carlos")||nombre.equalsIgnoreCase("pedro")||nombre.equalsIgnoreCase("juan")||nombre.equalsIgnoreCase("roberto")||nombre.equalsIgnoreCase("eduardo")&&!"estadounidense".equalsIgnoreCase(nacionalidad)&&
+                !"estadounidense".equalsIgnoreCase(lugar)&&"negro".equalsIgnoreCase(color)){
             
             JOptionPane.showMessageDialog(this,"No aceptamos latinos");
+            negros.add(new Jefes(seccion,temporal, 0,  edad, id, nacionalidad, lugar, nombre, model, color, null));
             
-        }else if(nacionalidad.equalsIgnoreCase("estadounidense")||lugar.equalsIgnoreCase("estadounidense")||color.equalsIgnoreCase("blanco")
+        }else if("estadounidense".equalsIgnoreCase(nacionalidad)&&"estadounidense".equalsIgnoreCase(lugar)&&color.equals("blanco")
                 ){
             
             Jefes jefe = cb_jefeMod.getItemAt(cb_jefeMod.getSelectedIndex());
@@ -4513,6 +4650,9 @@ private float gananciaBaleada;
 
     private void bttn_colorJefe1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bttn_colorJefe1MouseClicked
         // TODO add your handling code here:
+        Color c;
+        c=JColorChooser.showDialog(jMenu1, "Seleccione", Color.white);
+        bttn_colorJefe1.setForeground(c);
     }//GEN-LAST:event_bttn_colorJefe1MouseClicked
 
     private void cb_seccionJefe1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cb_seccionJefe1ItemStateChanged
@@ -4581,22 +4721,21 @@ private float gananciaBaleada;
         id=tf_id1.getText();
         nacionalidad=tf_nacionalidad1.getText();
         lugar=tf_lugar1.getText();
-        if(bttn_color1.getBackground()== Color.BLACK){
+        if(bttn_color1.getForeground()== Color.BLACK||bttn_color1.getForeground()== Color.black){
             color="negro";
-        }else if(bttn_color1.getBackground()== Color.WHITE){
+        }else if(bttn_color1.getForeground()== Color.WHITE||bttn_color1.getForeground()== Color.white){
             color="blanco";
         }
         estado=cb_estado1.getItemAt(cb_estado1.getSelectedIndex());
         seccion=cb_seccion1.getItemAt(cb_seccion1.getSelectedIndex());
         entrada=Integer.parseInt(sp_entrada1.getValue().toString());
         salida=Integer.parseInt(sp_salida1.getValue().toString());
-        if(!nombre.equalsIgnoreCase("carlos")||!nombre.equalsIgnoreCase("pedro")||!nombre.equalsIgnoreCase("juan")||!nombre.equalsIgnoreCase("roberto")||!nombre.equalsIgnoreCase("eduardo")||"estadounidense".equalsIgnoreCase(nacionalidad)||
-                "estadounidense".equalsIgnoreCase(lugar)||"blanco".equalsIgnoreCase(color)){
+        if((nacionalidad.equalsIgnoreCase("estadounidense")&&lugar.equalsIgnoreCase("estadounidense")&&color.equalsIgnoreCase("blanco"))){
             
             JOptionPane.showMessageDialog(this,"Solo aceptamos latinos pobres!!");
             
-        }else if(!nacionalidad.equalsIgnoreCase("estadounidense")||!lugar.equalsIgnoreCase("estadounidense")||!color.equalsIgnoreCase("blanco")
-                ){
+        }else if(nombre.equalsIgnoreCase("carlos")||nombre.equalsIgnoreCase("pedro")||nombre.equalsIgnoreCase("juan")||nombre.equalsIgnoreCase("roberto")||nombre.equalsIgnoreCase("eduardo")&&!"estadounidense".equalsIgnoreCase(nacionalidad)&&
+                !"estadounidense".equalsIgnoreCase(lugar)&&!"blanco".equalsIgnoreCase(color)){
         empleado.setColor(color);
         empleado.setEdad(edad);
         empleado.setEntrada(entrada);
@@ -4622,6 +4761,9 @@ private float gananciaBaleada;
 
     private void bttn_color1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bttn_color1MouseClicked
         // TODO add your handling code here:
+        Color c;
+        c=JColorChooser.showDialog(jMenu1, "Seleccione", Color.white);
+        bttn_color1.setForeground(c);
     }//GEN-LAST:event_bttn_color1MouseClicked
 
     private void tf_edadClientes1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_edadClientes1ActionPerformed
@@ -4646,6 +4788,9 @@ private float gananciaBaleada;
 
     private void bttn_colorClientes1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bttn_colorClientes1MouseClicked
         // TODO add your handling code here:
+        Color c;
+        c=JColorChooser.showDialog(jMenu1, "Seleccione", Color.white);
+        bttn_colorClientes1.setForeground(c);
     }//GEN-LAST:event_bttn_colorClientes1MouseClicked
 
     private void tf_dineroClientes1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_dineroClientes1ActionPerformed
@@ -4666,18 +4811,17 @@ private float gananciaBaleada;
         id=tf_idClientes1.getText();
         nacionalidad=tf_nacionalidadClientes1.getText();
         lugar=tf_lugarClientes1.getText();
-        if(bttn_colorClientes1.getBackground()== Color.BLACK){
+        if(bttn_colorClientes1.getForeground()== Color.BLACK||bttn_colorClientes1.getForeground()== Color.black){
             color="negro";
-        }else if(bttn_colorClientes1.getBackground()== Color.WHITE){
+        }else if(bttn_colorClientes1.getForeground()== Color.WHITE||bttn_colorClientes1.getForeground()== Color.white){
             color="blanco";
         }
-        if(!nombre.equalsIgnoreCase("carlos")||!nombre.equalsIgnoreCase("pedro")||!nombre.equalsIgnoreCase("juan")||!nombre.equalsIgnoreCase("roberto")||!nombre.equalsIgnoreCase("eduardo")||"estadounidense".equalsIgnoreCase(nacionalidad)||
-                "estadounidense".equalsIgnoreCase(lugar)||"blanco".equalsIgnoreCase(color)){
+        if((nacionalidad.equalsIgnoreCase("estadounidense")&&lugar.equalsIgnoreCase("estadounidense")&&color.equalsIgnoreCase("blanco"))){
             
             JOptionPane.showMessageDialog(this,"Solo aceptamos latinos pobres!!");
             
-        }else if(!nacionalidad.equalsIgnoreCase("estadounidense")||!lugar.equalsIgnoreCase("estadounidense")||!color.equalsIgnoreCase("blanco")
-                ){
+        }else if(nombre.equalsIgnoreCase("carlos")||nombre.equalsIgnoreCase("pedro")||nombre.equalsIgnoreCase("juan")||nombre.equalsIgnoreCase("roberto")||nombre.equalsIgnoreCase("eduardo")&&!"estadounidense".equalsIgnoreCase(nacionalidad)&&
+                !"estadounidense".equalsIgnoreCase(lugar)&&!"blanco".equalsIgnoreCase(color)){
         cliente.setColor(color);
         cliente.setDinero(sueldo);
         cliente.setNacionalidad(nacionalidad);
@@ -4771,6 +4915,9 @@ private float gananciaBaleada;
 
     private void bttn_colorFamilia1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bttn_colorFamilia1MouseClicked
         // TODO add your handling code here:
+        Color c;
+        c=JColorChooser.showDialog(jMenu1, "Seleccione", Color.white);
+        bttn_colorFamilia1.setForeground(c);
     }//GEN-LAST:event_bttn_colorFamilia1MouseClicked
 
     private void tf_nombreFamilia1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_nombreFamilia1ActionPerformed
@@ -4954,8 +5101,162 @@ private float gananciaBaleada;
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         // TODO add your handling code here:
         JOptionPane.showMessageDialog(this, "El programa consiste en agregar tipos de personas, ya sea familia, empleados, "
-                + "clientes, y jefes, disponen de sus propios atributos y color de piel");
+                + "clientes, y jefes, disponen de sus propios atributos y color de piel. Hay 2 articulos que se venden."
+                + "Ademas se crea ");
     }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        JFileChooser jfc = new JFileChooser();
+        int seleccion = jfc.showOpenDialog(this);
+        if (seleccion == JFileChooser.APPROVE_OPTION){
+            carpeta_guardada = jfc.getCurrentDirectory();
+        
+             DefaultTreeModel modeloArbol = (DefaultTreeModel) ArbolStart.getModel();
+             
+            DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) modeloArbol.getRoot();
+            DefaultMutableTreeNode carpeta = new DefaultMutableTreeNode(carpeta_guardada);
+            raiz.add(carpeta);
+                
+            modeloArbol.setRoot(raiz);
+            
+            ArbolStart.setModel(modeloArbol);
+        }
+
+
+
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        // TODO add your handling code here:
+        JFileChooser fileChooser = new JFileChooser();
+        int seleccion = fileChooser.showSaveDialog(this);
+        
+            if (seleccion == JFileChooser.APPROVE_OPTION) {
+                File dir = fileChooser.getSelectedFile();
+                boolean fueCreado = dir.mkdir();
+                DefaultMutableTreeNode Raiz = new DefaultMutableTreeNode();
+                DefaultTreeModel modeloArbol = (DefaultTreeModel) ArbolStart.getModel();
+                DefaultMutableTreeNode directory = new DefaultMutableTreeNode(dir);
+                Raiz.add(directory);
+                carpeta_guardada = dir;
+                guardarTodo();
+                JOptionPane.showMessageDialog(this, "Creado exitosamente");
+        
+            }
+        
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenu1ActionPerformed
+
+    private void tab_ordenesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tab_ordenesMouseClicked
+        // TODO add your handling code here:
+        DefaultComboBoxModel modelo = new DefaultComboBoxModel();
+            for (int i = 0; i < cliente.size(); i++) {
+                modelo.addElement(cliente.get(i));
+            }
+            cb_baleadasClientes.setModel(modelo);
+            modelo = new DefaultComboBoxModel();
+            for (int i = 0; i < empleado.size(); i++) {
+                modelo.addElement(empleado.get(i));
+            }
+            cb_baleadasEmpleado.setModel(modelo);
+             modelo = new DefaultComboBoxModel();
+            for (int i = 0; i < baleadas.size(); i++) {
+                modelo.addElement(baleadas.get(i));
+            }
+            cb_baleadasBaleadas.setModel(modelo);
+            
+    }//GEN-LAST:event_tab_ordenesMouseClicked
+
+    private void jTabbedPane2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane2MouseClicked
+        // TODO add your handling code here:
+        DefaultComboBoxModel modelo = new DefaultComboBoxModel();
+            for (int i = 0; i < cliente.size(); i++) {
+                modelo.addElement(cliente.get(i));
+            }
+            cb_baleadasClientes.setModel(modelo);
+            modelo = new DefaultComboBoxModel();
+            for (int i = 0; i < empleado.size(); i++) {
+                modelo.addElement(empleado.get(i));
+            }
+            cb_baleadasEmpleado.setModel(modelo);
+             modelo = new DefaultComboBoxModel();
+            for (int i = 0; i < baleadas.size(); i++) {
+                modelo.addElement(baleadas.get(i));
+            }
+            cb_baleadasBaleadas.setModel(modelo);
+            modelo = new DefaultComboBoxModel();
+            for (int i = 0; i < cliente.size(); i++) {
+                modelo.addElement(cliente.get(i));
+            }
+            cb_gatosCliente.setModel(modelo);
+            modelo = new DefaultComboBoxModel();
+            for (int i = 0; i < empleado.size(); i++) {
+                modelo.addElement(empleado.get(i));
+            }
+            cb_gatosEmpleados.setModel(modelo);
+            modelo = new DefaultComboBoxModel();
+            for (int i = 0; i < gatos.size(); i++) {
+                modelo.addElement(gatos.get(i));
+            }
+            cb_gatosGatos.setModel(modelo);
+            
+    }//GEN-LAST:event_jTabbedPane2MouseClicked
+
+    private void jButton28MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton28MouseClicked
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(this, "El total es de las baleadas: "+total);
+    }//GEN-LAST:event_jButton28MouseClicked
+
+    private void jButton29MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton29MouseClicked
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(this, "El total es de los gatos: "+total);
+    }//GEN-LAST:event_jButton29MouseClicked
+
+    private void jButton30MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton30MouseClicked
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(this, "La ganancia de los gatos es: "+gananciaGato);
+    }//GEN-LAST:event_jButton30MouseClicked
+
+    private void jButton31MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton31MouseClicked
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(this, "La ganancia de las baleadas es: "+gananciaBaleada);
+    }//GEN-LAST:event_jButton31MouseClicked
+
+    private void ArbolStartMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ArbolStartMouseClicked
+        // TODO add your handling code here:
+        if ( evt.isMetaDown()){
+            menu1.show(ArbolStart, getX(), getY());
+            int pos= ArbolStart.getClosestRowForLocation(evt.getX(),evt.getY());
+            ArbolStart.setSelectionRow(pos);
+             aux = ArbolStart.getSelectionPath().getLastPathComponent();
+            
+        }
+        
+    }//GEN-LAST:event_ArbolStartMouseClicked
+
+    private void menu1_abrirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu1_abrirMouseClicked
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_menu1_abrirMouseClicked
+
+    private void menu1_abrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu1_abrirActionPerformed
+        // TODO add your handling code here:
+        DirectAux="";
+        DirectAux+= aux;
+        File archivo = new File(DirectAux);
+        carpeta_guardada= archivo;
+        Guardo=true;
+        JOptionPane.showMessageDialog(this, "Se abrio su carpeta");
+        try {
+            CargarTodo();
+        } catch (Exception ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_menu1_abrirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -4993,6 +5294,7 @@ private float gananciaBaleada;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTree ArbolStart;
     private javax.swing.JRadioButton Familia1;
     private javax.swing.JRadioButton Familia2;
     private javax.swing.JRadioButton Familia3;
@@ -5066,7 +5368,11 @@ private float gananciaBaleada;
     private javax.swing.JButton jButton25;
     private javax.swing.JButton jButton26;
     private javax.swing.JButton jButton27;
+    private javax.swing.JButton jButton28;
+    private javax.swing.JButton jButton29;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton30;
+    private javax.swing.JButton jButton31;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
@@ -5095,6 +5401,7 @@ private float gananciaBaleada;
     private javax.swing.JLabel jLabel113;
     private javax.swing.JLabel jLabel114;
     private javax.swing.JLabel jLabel115;
+    private javax.swing.JLabel jLabel116;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
@@ -5115,6 +5422,7 @@ private float gananciaBaleada;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
@@ -5164,6 +5472,7 @@ private float gananciaBaleada;
     private javax.swing.JLabel jLabel73;
     private javax.swing.JLabel jLabel74;
     private javax.swing.JLabel jLabel75;
+    private javax.swing.JLabel jLabel76;
     private javax.swing.JLabel jLabel77;
     private javax.swing.JLabel jLabel78;
     private javax.swing.JLabel jLabel79;
@@ -5211,6 +5520,7 @@ private float gananciaBaleada;
     private javax.swing.JPanel jPanel20;
     private javax.swing.JPanel jPanel21;
     private javax.swing.JPanel jPanel22;
+    private javax.swing.JPanel jPanel23;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
@@ -5240,10 +5550,10 @@ private float gananciaBaleada;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
+    private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JSpinner jSpinner2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
-    private javax.swing.JTabbedPane jTabbedPane3;
     private javax.swing.JTabbedPane jTabbedPane4;
     private javax.swing.JTabbedPane jTabbedPane5;
     private javax.swing.JTabbedPane jTabbedPane6;
@@ -5268,6 +5578,8 @@ private float gananciaBaleada;
     private com.toedter.calendar.JDateChooser jf_fecha;
     private javax.swing.JList<String> lista_ventasBaleadas;
     private javax.swing.JList<String> lista_ventasGatos;
+    private javax.swing.JPopupMenu menu1;
+    private javax.swing.JMenuItem menu1_abrir;
     private javax.swing.JRadioButton persona1;
     private javax.swing.JRadioButton persona2;
     private javax.swing.JRadioButton persona3;
@@ -5288,6 +5600,7 @@ private float gananciaBaleada;
     private javax.swing.JSpinner sp_numArt1;
     private javax.swing.JSpinner sp_salida;
     private javax.swing.JSpinner sp_salida1;
+    private javax.swing.JTabbedPane tab_ordenes;
     private javax.swing.JTextField tf_dineroClientes;
     private javax.swing.JTextField tf_dineroClientes1;
     private javax.swing.JTextField tf_edad;
@@ -5298,8 +5611,6 @@ private float gananciaBaleada;
     private javax.swing.JTextField tf_edadFamilia1;
     private javax.swing.JTextField tf_edadJefe;
     private javax.swing.JTextField tf_edadJefe1;
-    private javax.swing.JTextField tf_gananciasBaleadas;
-    private javax.swing.JTextField tf_gananciasGatos;
     private javax.swing.JTextField tf_id;
     private javax.swing.JTextField tf_id1;
     private javax.swing.JTextField tf_idClientes;
@@ -5336,8 +5647,6 @@ private float gananciaBaleada;
     private javax.swing.JTextField tf_nombreJefe1;
     private javax.swing.JTextField tf_sueldo;
     private javax.swing.JTextField tf_sueldo1;
-    private javax.swing.JTextField tf_totalBaleadas;
-    private javax.swing.JTextField tf_totalGatos;
     private javax.swing.JTree tree1;
     private javax.swing.JTree tree2;
     // End of variables declaration//GEN-END:variables
@@ -5357,8 +5666,478 @@ ArrayList tempFamiliar=new ArrayList();
 ArrayList<Ordenes> ordenes = new ArrayList();
 ArrayList<Ventas> ventas = new ArrayList();
 ArrayList negros = new ArrayList();
-ArrayList jefes = new ArrayList();
+ArrayList<Clientes> jefes = new ArrayList();
 
 //Poner los spinners hasta 24 horas
-
+public void guardarTodo(){
+    guardarJefes();
+    guardarClientes();
+    guardarEmpleados();
+    guardarFamiliar();
+    guardarBaleada();
+    guardarGatos();
+    guardarOrdenes();
+    guardarVentas();
 }
+  
+    public void guardarJefes() {
+        String texto = "";
+        for (Jefes tempJefe : jefe) {
+            texto
+                    += tempJefe.getNombre() + ","
+                    + tempJefe.getID() + ","
+                    + tempJefe.getColor() + ","
+                    + tempJefe.getLugar()+","
+                            + tempJefe.getEdad() + ","
+                            + tempJefe.getSeccion() + ","
+                            + tempJefe.getNacionalidad() + ","
+                            + tempJefe.getNumero() + ","
+                            + tempJefe.getGanancia() + ","
+                            + tempJefe.getFamiliares() + ","
+                            + tempJefe.getEmpleados() +";";
+                            for (Familiar t2 : tempJefe.getFamiliares()) {
+                                texto+= t2.getID()+"#";
+                    }
+                            for (Empleado t1 : tempJefe.getEmpleados()) {
+                                 texto+= t1.getID()+"#";
+                                        
+                            }
+         }
+        escribirArchivo("Jefes", texto);
+    }
+    public  void guardarEmpleados() {
+        String texto = "";
+        for (Empleado tempEmple : empleado) {
+            texto
+                   += tempEmple.getNombre() + ","
+                    + tempEmple.getID() + ","
+                    + tempEmple.getColor() + ","
+                    + tempEmple.getLugar()+","
+                    + tempEmple.getEdad() + ","
+                    + tempEmple.getSeccion() + ","
+                    + tempEmple.getNacionalidad() + ","
+                    + tempEmple.getEntrada() + ","
+                    + tempEmple.getSalida() + ","
+                    + tempEmple.getEstado() +";";
+                    for(Familiar t2 : tempEmple.getFamiliares()){
+                        texto += t2.getID() + ",";
+                    }        
+         }
+        escribirArchivo("Empleados", texto);
+    }
+    public  void guardarClientes() {
+        String texto = "";
+        for (Clientes temp : cliente) {
+            texto
+                   += temp.getNombre() + ","
+                    + temp.getID() + ","
+                    + temp.getColor() + ","
+                    + temp.getLugar()+","
+                    + temp.getEdad() + ","
+                    + temp.getDinero() + ","
+                    + temp.getNacionalidad() + ","
+                    + temp.getTicket() + ",";
+                    for(Ordenes t1 : temp.getOrdenes()){
+                        texto += t1 + ",";
+                    } 
+                    for(Familiar t2 : temp.getFamiliares()){
+                        texto += t2 + ",";
+                    }  
+         }
+        escribirArchivo("Clientes", texto);
+    }
+    public void guardarGatos(){
+        String texto = "";
+        for (Gatos temp : gatos) {
+            texto
+                   += temp.getPrecio() + ","
+                    + temp.getAltura() + ","
+                    + temp.getPeso() + ",";
+                         
+         }
+        escribirArchivo("Jefes", texto); 
+    }
+    public void guardarBaleada(){
+        String texto = "";
+        for (Baleadas temp : baleadas) {
+            texto
+                   += temp.getPrecio() + ",";
+                    for(String t1 : temp.getIngredientes()){
+                        texto += t1 + ",";
+                    }  
+                    
+                         
+         }
+        escribirArchivo("Baleadas", texto); 
+    }
+    public void guardarFamiliar(){
+        String texto = "";
+        for (Familiar temp : familias) {
+            texto
+                   += temp.getNombre() + ","
+                    + temp.getID() + ","
+                    + temp.getColor() + ","
+                    + temp.getLugar()+","
+                    + temp.getEdad() + ","
+                    + temp.getPadre() + ","
+                    + temp.getNacionalidad() + ",";
+                    for(Object t1 : temp.getHijos()){
+                        texto += t1 + ",";
+                    } 
+                    for(Familiar t2 : temp.getFamiliares()){
+                        texto += t2 + ",";
+                    }  
+         }
+        escribirArchivo("Familiar", texto);
+    }
+    public void guardarArticulos(){
+        String texto = "";
+        for (Articulos temp : articulos) {
+                texto += temp.getPrecio() + ",";
+                
+         }
+        escribirArchivo("Articulos", texto);
+    
+}
+    public void guardarVentas(){
+        String texto = "";
+        for (Ventas temp : ventas) {
+                texto += temp.getCliente() + ","
+                        +temp.getEmpleado() + ","
+                        +temp.getDate()+ ","
+                        
+                        +temp.getTotal()+ ";";
+                
+         }
+        escribirArchivo("Ventas", texto);
+    }
+    public void guardarOrdenes(){
+        String texto = "";
+        for (Ordenes temp : ordenes) {
+            texto
+                   += temp.getCliente() + ","
+                    + temp.getEmpleado() + ","
+                    + temp.getTotal() + ","
+                    + temp.getCantidadArticulo()+","
+                    + temp.getArticulos() + ",";
+                    for(Articulos t1 : temp.getArticulos()){
+                        texto += t1 + ",";
+                    } 
+                    
+         }
+        escribirArchivo("Ordenes", texto);
+        
+    }
+    
+public void escribirArchivo(String nombreArchivo, String texto) {
+
+        try {
+            String carpeta = "";
+            carpeta += carpeta_guardada;
+            FileWriter fw = new FileWriter(carpeta + "/" + nombreArchivo + ".txt");
+            BufferedWriter bw = new BufferedWriter(fw);
+            bw.write(texto);
+
+            bw.flush();
+            } catch (Exception e) {
+        }
+
+    }
+public void CargarTodo() throws IOException{
+    cargarGatos();
+    cargarBaleadas();
+    cargarFamiliar();
+    cargarEmpleado();
+    cargarCliente();
+    cargarJefes();
+    cargarOrdenes();
+    cargarVentas();
+}
+public String cargar(String nombre) throws FileNotFoundException, IOException{
+        String ivo = "";
+        String text = "";
+        ivo +=carpeta_guardada+"/"+nombre+".txt";      
+        
+        FileReader fr= new FileReader(ivo);
+        BufferedReader br = new BufferedReader(fr);
+       
+        text = br.readLine();
+        
+        return text;
+}
+
+    public void cargarGatos() throws IOException{
+        gatos.clear();
+        Scanner sc = new Scanner(cargar("Gatos"));
+        sc.useDelimiter(";");
+        while(sc.hasNext()){
+            String cat = sc.next();
+            Scanner sc2 = new Scanner(cat);
+            sc2.useDelimiter(",");
+            gatos.add(new Gatos());
+            int pos = gatos.size()-1;
+            gatos.get(pos).setPrecio(Float.parseFloat(sc2.next()));                         
+            gatos.get(pos).setAltura(Integer.parseInt(sc2.next()));
+            gatos.get(pos).setPeso(Integer.parseInt(sc2.next()));
+        }
+    }
+    
+    
+    public void cargarBaleadas() throws IOException{
+        baleadas.clear();
+        Scanner sc = new Scanner(cargar("Gatos"));
+        sc.useDelimiter(";");
+        while(sc.hasNext()){
+            String bal = sc.next();
+            Scanner sc2 = new Scanner(bal);
+            sc2.useDelimiter(",");
+            baleadas.add(new Baleadas());
+            int pos = baleadas.size()-1;
+            baleadas.get(pos).setPrecio(Float.parseFloat(sc2.next()));   
+            Scanner sc3=new Scanner(System.in);
+            sc3.useDelimiter("#");
+            while(sc3.hasNext()){
+                baleadas.get(pos).getIngredientes().add(sc3.next());
+            }
+        }
+    }
+    
+    
+    public void cargarEmpleado() throws IOException{
+        empleado.clear();
+        Scanner sc = new Scanner(cargar("Empleado"));
+        sc.useDelimiter(";");
+        while(sc.hasNext()){
+            String emp = sc.next();
+            Scanner sc2 = new Scanner(emp);
+            sc2.useDelimiter(",");
+            empleado.add(new Empleado());
+            int pos = empleado.size()-1;
+            empleado.get(pos).setID(sc2.next());   
+            empleado.get(pos).setColor(sc2.next());
+            empleado.get(pos).setLugar(sc2.next());
+            empleado.get(pos).setEdad(Integer.parseInt(sc2.next()));
+            empleado.get(pos).setSeccion(sc2.next());
+            empleado.get(pos).setNacionalidad(sc2.next());
+            empleado.get(pos).setEntrada(Integer.parseInt(sc2.next()));
+            empleado.get(pos).setSalida(Integer.parseInt(sc2.next()));
+            empleado.get(pos).setEstado(sc2.next());
+            
+            Scanner sc3=new Scanner(System.in);
+            sc3.useDelimiter("#");
+            while(sc3.hasNext()){
+                empleado.get(pos).getFamiliares().add(new Familiar());
+                empleado.get(pos).getFamiliares().get(
+                empleado.get(pos).getFamiliares().size()-1).setID(sc3.next());
+            }    
+            }
+        }   
+  public void cargarFamiliar() throws IOException { 
+        familias.clear();
+        Scanner sc = new Scanner(cargar("Familiares"));
+        sc.useDelimiter(";");
+        while(sc.hasNext()){
+            String cat = sc.next();
+            Scanner sc2 = new Scanner(cat);
+            sc2.useDelimiter(",");
+            familias.add(new Familiar());
+            int pos = familias.size()-1;
+            familias.get(pos).setNombre(sc2.next());
+            familias.get(pos).setID(sc2.next());
+            familias.get(pos).setColor((sc2.next()));
+            familias.get(pos).setLugar(sc2.next());
+            familias.get(pos).setEdad(Integer.parseInt(sc2.next()));
+            familias.get(pos).setPadre(new Familiar());
+            familias.get(pos).getPadre().setID(sc2.next());
+            familias.get(pos).setNacionalidad(sc2.next());
+            Scanner sc3 = new Scanner (sc2.next());
+            sc3.useDelimiter("#");
+            while (sc3.hasNext()){
+                familias.get(pos).getFamiliares().add(new Familiar());
+                familias.get(pos).getFamiliares().get(
+                familias.get(pos).getFamiliares().size()-1).setID(sc3.next());
+                }
+            for (Familiar f1 : familias) {
+            for (Familiar f2 : familias) {
+                if (f1.getPadre().getID().equalsIgnoreCase(f2.getPadre().getID())) {
+                    f1.setPadre(f2);
+                    }
+            }
+        }
+            
+        }
+
+        }
+
+    public void cargarCliente() throws IOException{
+     cliente.clear();
+        Scanner sc = new Scanner(cargar("Clientes"));
+        sc.useDelimiter(";");
+        while(sc.hasNext()){
+            String cli = sc.next();
+            Scanner sc2 = new Scanner(cli);
+            sc2.useDelimiter(",");
+            cliente.add(new Clientes());
+            int pos = cliente.size()-1;
+            cliente.get(pos).setID(sc2.next());
+            cliente.get(pos).setColor(sc2.next());
+            cliente.get(pos).setLugar((sc2.next()));
+            cliente.get(pos).setEdad(Integer.parseInt(sc2.next()));
+            cliente.get(pos).setDinero(Integer.parseInt(sc2.next()));
+            cliente.get(pos).setNacionalidad(sc2.next());
+            cliente.get(pos).setTicket(Integer.parseInt(sc2.next()));
+            Scanner sc3 = new Scanner (sc2.next());
+            sc3.useDelimiter("#");
+            while (sc3.hasNext()){
+                cliente.get(pos).getFamiliares().add(new Familiar());
+                cliente.get(pos).getFamiliares().get(
+                cliente.get(pos).getFamiliares().size()-1).setID(sc3.next());
+                }
+        }
+ }
+    public void cargarArticulos() throws IOException{
+        articulos.clear();
+        Scanner sc = new Scanner(cargar("Articulos"));
+        sc.useDelimiter(";");
+        while(sc.hasNext()){
+            String cli = sc.next();
+            Scanner sc2 = new Scanner(cli);
+            sc2.useDelimiter(",");
+            articulos.add(new Articulos());
+            int pos = articulos.size()-1;
+            articulos.get(pos).setID(sc2.next());
+            articulos.get(pos).setPrecio(Integer.parseInt(sc2.next()));
+            
+        }
+    }
+    public void cargarVentas() throws IOException{
+        ventas.clear();
+        Scanner sc = new Scanner(cargar("Ventas"));
+        sc.useDelimiter(";");
+        while(sc.hasNext()){
+            String cli = sc.next();
+            Scanner sc2 = new Scanner(cli);
+            sc2.useDelimiter(",");
+            ventas.add(new Ventas());
+            int pos = ventas.size()-1;
+            ventas.get(pos).setCliente(new Clientes());
+            ventas.get(pos).getCliente().setID(sc2.next());
+            ventas.get(pos).setEmpleado(new Empleado());
+            ventas.get(pos).getEmpleado().setID(sc2.next());
+            ventas.get(pos).setDate(new Date(sc2.next()));
+            ventas.get(pos).setTotal(Integer.parseInt(sc2.next()));
+            
+            
+            
+        }
+    }
+    public void cargarOrdenes() throws IOException{
+        ordenes.clear();
+        Scanner sc = new Scanner(cargar("Ordenes"));
+        sc.useDelimiter(";");
+        while(sc.hasNext()){
+            String cli = sc.next();
+            Scanner sc2 = new Scanner(cli);
+            sc2.useDelimiter(",");
+            ordenes.add(new Ordenes());
+            int pos = ordenes.size()-1;
+            ordenes.get(pos).setCliente(new Clientes());
+            ordenes.get(pos).getCliente().setID(sc2.next());
+            ordenes.get(pos).setEmpleado(new Empleado());
+            ordenes.get(pos).getEmpleado().setID(sc2.next());
+            ordenes.get(pos).setDate(new Date(sc2.next()));
+            ordenes.get(pos).setTotal(Integer.parseInt(sc2.next()));
+            
+    }
+    }
+   
+   
+   public void cargarJefes() throws IOException {
+        jefe.clear();
+        Scanner sc = new Scanner(cargar("Jefes"));
+        sc.useDelimiter(";");
+        while (sc.hasNext()) {
+            String t = sc.next();
+            Scanner s2 = new Scanner(t);
+             s2.useDelimiter(",");
+            jefe.add(new Jefes());
+            int pos = jefe.size() - 1;
+            jefe.get(pos).setNombre(sc.next());
+            jefe.get(pos).setID(sc.next());
+            jefe.get(pos).setColor(sc.next());
+            jefe.get(pos).setLugar(sc.next());
+            jefe.get(pos).setEdad(sc.nextInt());
+            jefe.get(pos).setSeccion(sc.next());
+            jefe.get(pos).setNacionalidad(sc.next());
+            jefe.get(pos).setNumero(sc.nextInt());
+            jefe.get(pos).setGanancia(sc.nextInt());
+            Scanner s3 = new Scanner(s2.next());
+            s3.useDelimiter("*");
+            while (s3.hasNext()) {
+                jefe.get(pos).getFamiliares().add(new Familiar());
+                jefe.get(pos).getFamiliares().get(
+                        jefe.get(pos).getFamiliares().size() - 1).setID(s3.next());
+            }
+             Scanner s4 = new Scanner(s2.next());
+            s4.useDelimiter("*");
+            while (s4.hasNext()) {
+                jefe.get(pos).getEmpleados().add(new Empleado());
+                jefe.get(pos).getEmpleados().get(
+                        jefe.get(pos).getEmpleados().size() - 1).setID(s4.next());
+            }
+        }
+        for (Jefes e : jefe) {
+            for (Familiar f1 : e.getFamiliares()) {
+                for (Familiar f2 : familias) {
+                    if (f1.getID().equalsIgnoreCase(f2.getID())) {
+                        f1 = f2;
+                    }
+                }
+                }
+        }
+    }
+   
+  
+    
+   public DefaultMutableTreeNode recursivo (Familiar familiar){
+        DefaultMutableTreeNode nodo = new DefaultMutableTreeNode(familiar);
+        
+        for (Familiar f : familias) {
+            if (familiar.equals(f.getPadre())){
+                nodo.add(recursivo(f));
+                 } else{
+                nodo.add(new DefaultMutableTreeNode(f));
+            }
+        }
+        
+        return nodo;
+    }
+   public DefaultTreeModel arbol(Persona persona){
+        DefaultMutableTreeNode raiz = new DefaultMutableTreeNode();
+        DefaultTreeModel modeloArbol = new DefaultTreeModel(raiz);
+        
+        for (Familiar f : persona.getFamiliares()) {
+            DefaultMutableTreeNode nodo = new DefaultMutableTreeNode(recursivo(f));
+            raiz.add(nodo);
+        }
+         return modeloArbol ;
+        
+        
+    }
+}    
+    
+    
+    
+    
+    
+  
+
+
+
+
+ 
+    
+                
+    
+
+

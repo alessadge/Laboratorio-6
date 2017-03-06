@@ -23,7 +23,7 @@ public class Baleadas extends Articulos {
 
     @Override
     public String toString() {
-        return "Baleadas{" + "ingredientes=" + ingredientes + '}';
+        return ""+precio;
     }
     
 }
